@@ -1,15 +1,18 @@
 package com.example.douglass_macbook.ss12_simon_says;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.Button;
 import com.parse.Parse;
-
+import com.parse.ParseObject;
 
 public class MainActivity extends ActionBarActivity {
 
+    Button start_button;
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +22,27 @@ public class MainActivity extends ActionBarActivity {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "9yqUakCzEIKfujACCHu063LqshOLUZrySAspjCO9", "rV1JpxIniI8YBl6dt5lG0bFj6r0TtE2uHUIn3Rx1");
+
+        //"signing us user"
+        ParseObject user = new ParseObject("User");
+        user.saveInBackground();
+        userId = user.getObjectId();
+
+        //assign this to match xml button
+        start_button = (Button) findViewById(R.id.button_start);
+        start_button.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check if there are other users
+                //Parse
+
+                //Start the game
+
+            }
+        });
     }
+
+
 
 
     @Override
