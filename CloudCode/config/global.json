@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "SS12 Simon Says": {
+            "applicationId": "9yqUakCzEIKfujACCHu063LqshOLUZrySAspjCO9", 
+            "masterKey": "5jIQ7RMRBUBAfjpVaPB5JW1qtE0HQMRuFczzuggC"
+        }, 
+        "_default": {
+            "link": "SS12 Simon Says"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.4"
+    }
+}
