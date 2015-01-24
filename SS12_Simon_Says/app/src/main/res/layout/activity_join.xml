@@ -26,8 +26,7 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="20"
-            android:textStyle="bold"
-            android:weight="centered"/>
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -51,7 +50,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_above="@+id/button_start"
-            android:weight="10"
+            android:layout_weight="10"
             />
 
         <Button
@@ -65,7 +64,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textSize="50sp"
-            android:weight="40"/>
+            android:layout_weight="40"/>
     </LinearLayout>
 
 </RelativeLayout>

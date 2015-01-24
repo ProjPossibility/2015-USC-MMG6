@@ -43,8 +43,7 @@
                 android:background="#012793"
                 android:layout_weight="10"
                 android:textSize="60sp"
-                android:layout_margin="10dp"
-                android:style="@style/buttonStyle"/>
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
 
