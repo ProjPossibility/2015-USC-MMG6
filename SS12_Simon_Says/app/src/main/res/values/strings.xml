@@ -5,4 +5,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="title">Simon Says</string>
+    <string name="round">Round</string>
+    <string name="round_number">Round Num</string>
+    <string name="instruction">Instruction</string>
+    <string name="player1">P1:</string>
+    <string name="player2">P2:</string>
+    <string name="player3">P3:</string>
+    <string name="player4">P4:</string>
+
+    <string name="instruction1"></string>
+
 </resources>
