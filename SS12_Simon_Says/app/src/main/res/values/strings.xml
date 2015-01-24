@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SS12 Simon Says</string>
+    <string name="app_name">Simon Says</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_join">Join Game</string>
@@ -17,6 +17,12 @@
     <string name="help">Help</string>
     <string name="start_game">Start Game</string>
     <string name="instruction_text">INSTRUCTIONS FOR GAME FILL HERE</string>
+
+    <style name="buttonStyle">
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
 
     <string-array name="instructions_action_ind">
         <item>Go Left </item>
@@ -55,7 +61,7 @@
         <item>Double Number</item>
     </string-array>
 
-    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_game">Simon Says</string>
     <string name="title_activity_activity_instruction">ActivityInstruction</string>
 
 </resources>
