@@ -2,7 +2,6 @@ package com.example.douglass_macbook.ss12_simon_says;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +34,7 @@ public class JoinActivity extends ActionBarActivity {
         //"signing us user"
         user = new ParseObject("User");
         user.saveInBackground();
-        user.put("foo", "bar");
+        user.put("lives", "3");
         userId = user.getObjectId();
 
         //assign this to match xml button
@@ -44,26 +43,25 @@ public class JoinActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //check if there are other users
-                //Parse
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
-                query.whereEqualTo("foo", "bar");
                 query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
                     public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
                         if (e == null && parseObjects.size()>1) {
                             Toast.makeText(getApplicationContext(), parseObjects.size(), Toast.LENGTH_SHORT);
-                            Log.d("score", "Retrieved " + parseObjects.size() + " scores");
+                            startGame();
                         } else {
-                            Log.d("score", "Error: " + e.getMessage());
+                            Toast.makeText(getApplicationContext(), "Need at least two users!", Toast.LENGTH_SHORT);
                         }
                     }
                 });
-                //Start the game
             }
         });
     }
+    private void startGame() {
 
 
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
