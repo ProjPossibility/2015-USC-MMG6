@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.FunctionCallback;
 import com.parse.Parse;
+import com.parse.ParseCloud;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -36,6 +39,18 @@ public class JoinActivity extends ActionBarActivity {
         user.saveInBackground();
         user.put("lives", "3");
         userId = user.getObjectId();
+
+        //Testing parse code
+        ParseCloud.callFunctionInBackground("hello", new HashMap<String, Object>(), new FunctionCallback<String>() {
+            @Override
+            public void done(String s, com.parse.ParseException e) {
+                if (e == null) {
+                    // result is "Hello world!"
+                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
 
         //assign this to match xml button
         start_button = (Button) findViewById(R.id.button_start);

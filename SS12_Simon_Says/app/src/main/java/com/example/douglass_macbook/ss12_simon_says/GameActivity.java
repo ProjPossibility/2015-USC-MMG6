@@ -5,12 +5,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.parse.FunctionCallback;
-import com.parse.ParseCloud;
-
-import java.util.HashMap;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -34,17 +28,6 @@ public class GameActivity extends ActionBarActivity {
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
         textView_round = (TextView)findViewById(R.id.textView_round);
-
-        ParseCloud.callFunctionInBackground("hello", new HashMap<String, Object>(), new FunctionCallback<String>() {
-            @Override
-            public void done(String s, com.parse.ParseException e) {
-                if (e == null) {
-                    // result is "Hello world!"
-                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
 
         //JSON CODE
 //        //getting
