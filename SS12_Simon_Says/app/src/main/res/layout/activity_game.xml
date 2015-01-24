@@ -94,7 +94,6 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="90"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/round"
                 android:textSize="60sp"

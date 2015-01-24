@@ -46,8 +46,10 @@ public class JoinActivity extends ActionBarActivity {
             public void done(String s, com.parse.ParseException e) {
                 if (e == null) {
                     // result is "Hello world!"
-                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Exception throw", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -55,7 +55,7 @@
         <item>Double Number</item>
     </string-array>
 
-    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_game">Simon Says</string>
     <string name="title_activity_activity_instruction">ActivityInstruction</string>
 
 </resources>
