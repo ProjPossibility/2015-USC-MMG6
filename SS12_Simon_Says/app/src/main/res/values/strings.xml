@@ -14,6 +14,8 @@
     <string name="player3">P3:</string>
     <string name="player4">P4:</string>
     <string name="instruction_simon">Simon Says</string>
+    <string name="help">Help</string>
+    <string name="start_game">Start Game</string>
 
     <string-array name="instructions_action_ind">
         <item>Go Left </item>
