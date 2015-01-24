@@ -14,7 +14,47 @@
     <string name="player2">P2:</string>
     <string name="player3">P3:</string>
     <string name="player4">P4:</string>
+    <string name="instruction_simon">Simon Says</string>
 
-    <string name="instruction1"></string>
+    <string-array name="instructions_action_ind">
+        <item>Go Left </item>
+        <item>Go Right </item>
+        <item>Go Up </item>
+        <item>Go Down </item>
+        <item>Punch Forward </item>
+        <item>Elbow Back </item>
+        <item>Stay Still </item>
+        <item>Move </item>
+    </string-array>
+
+    <string-array name="instructions_mental_ind">
+        <item>Odd Add </item>
+        <item>Even Add </item>
+        <item>Odd Subtract </item>
+        <item>Even Subtract</item>
+        <item>Add </item>
+        <item>Subtract </item>
+        <item>Double Number </item>
+    </string-array>
+
+    <string-array name="instructions_group">
+        <item>Go Left</item>
+        <item>Go Right</item>
+        <item>Go Up</item>
+        <item>Go Down</item>
+        <item>Punch Forward</item>
+        <item>Elbow Back</item>
+        <item>Stay Still</item>
+        <item>Move</item>
+        <item>Odd Add </item>
+        <item>Even Add </item>
+        <item>Odd Subtract </item>
+        <item>Even Subtract</item>
+        <item>Add </item>
+        <item>Subtract </item>
+        <item>Double Number</item>
+    </string-array>
+
+
 
 </resources>
