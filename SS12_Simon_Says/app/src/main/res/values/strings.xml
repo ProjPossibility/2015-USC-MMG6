@@ -7,7 +7,7 @@
     <string name="title_activity_join">Join Game</string>
     <string name="title">Simon Says</string>
     <string name="round">Round</string>
-    <string name="round_number">Round Num</string>
+    <string name="round_number">R</string>
     <string name="instruction">Instruction</string>
     <string name="player1">P1:</string>
     <string name="player2">P2:</string>

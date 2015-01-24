@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.FunctionCallback;
 import com.parse.Parse;
+import com.parse.ParseCloud;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -37,6 +40,20 @@ public class JoinActivity extends ActionBarActivity {
         user.put("lives", "3");
         userId = user.getObjectId();
 
+        //Testing parse code
+        ParseCloud.callFunctionInBackground("hello", new HashMap<String, Object>(), new FunctionCallback<String>() {
+            @Override
+            public void done(String s, com.parse.ParseException e) {
+                if (e == null) {
+                    // result is "Hello world!"
+                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Exception throw", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         //assign this to match xml button
         start_button = (Button) findViewById(R.id.button_start);
         start_button.setOnClickListener( new View.OnClickListener() {
@@ -48,10 +65,10 @@ public class JoinActivity extends ActionBarActivity {
                     @Override
                     public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
                         if (e == null && parseObjects.size()>1) {
-                            Toast.makeText(getApplicationContext(), parseObjects.size(), Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), parseObjects.size(), Toast.LENGTH_SHORT).show();
                             startGame();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Need at least two users!", Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Need at least two users!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

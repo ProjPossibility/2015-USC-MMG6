@@ -12,6 +12,7 @@
         android:layout_height="fill_parent">
 
         <TextView
+            android:textStyle="bold"
             android:layout_width="fill_parent"
             android:layout_height="400dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -29,11 +30,11 @@
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/linearLayout"
-            android:layout_above="@+id/textView_round"
-            android:layout_below="@+id/textView_instruction">
+            android:id="@+id/linearLayout">
+
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -42,6 +43,7 @@
                 android:layout_weight="4" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -50,6 +52,7 @@
                 android:layout_weight="4" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -58,6 +61,7 @@
                 android:layout_weight="4" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -72,27 +76,28 @@
             android:layout_height="fill_parent">
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="90"
+                android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/round"
+                android:textSize="60sp"
                 android:id="@+id/textView_round"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                  />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/round_number"
                 android:id="@+id/textView_roundNum"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentLeft="true"/>
 
-
-                />
 
         </LinearLayout>
 
