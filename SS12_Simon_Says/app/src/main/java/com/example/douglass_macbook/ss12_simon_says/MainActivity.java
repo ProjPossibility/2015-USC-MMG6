@@ -12,7 +12,6 @@ import com.parse.Parse;
 
 public class MainActivity extends ActionBarActivity {
 
-
     Button button_startGame;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +25,6 @@ public class MainActivity extends ActionBarActivity {
                 MainActivity.this.startActivity(myIntent);
             }
         });
-
-
 
         // Parse stuff:
         // Enable Local Datastore.
