@@ -1,5 +1,9 @@
 package com.example.douglass_macbook.ss12_simon_says;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -8,14 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class GameActivity extends ActionBarActivity {
+public class GameActivity extends ActionBarActivity implements SensorEventListener {
 
     TextView textView_instructions;
     TextView textView_p1;
@@ -33,10 +38,29 @@ public class GameActivity extends ActionBarActivity {
     ArrayList <Integer> arraylist;
     List<String> actionsArray;
 
+    // Timer stuff
+    private Timer myTimer = new Timer();
+    private TimerTask mCommandTimer;
+
+    // Sensor stuff
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private long mLastUpdateTime;
+    private boolean detect;
+
+    // Constants
+    public static final int SENSOR_UPDATE_DELAY = 100;
+    public static final float ROTATION_THRESHOLD = 0.65f;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        //dougStuff
+        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        detect = false;
 
         //setting textviews
         textView_instructions = (TextView)findViewById(R.id.textView_instruction);
@@ -47,14 +71,17 @@ public class GameActivity extends ActionBarActivity {
         textView_round = (TextView)findViewById(R.id.textView_round);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
-        ParseCloud.callFunctionInBackground("get_instruction", new HashMap<String, Object>(), new FunctionCallback<HashMap<String, Object>>() {
+        ParseCloud.callFunctionInBackground("get_instruction",
+            new HashMap<String, Object>(),
+            new FunctionCallback<HashMap<String, Object>>()
+            {
             @Override
             public void done(HashMap<String, Object> instruction, com.parse.ParseException e) {
                 if (e == null) {
                     simonSays = (boolean)instruction.get("simonSays");
                     arraylist = (ArrayList<Integer>) instruction.get("who");
                     action = (int)instruction.get("action");
-                    timeStamp = (int)instruction.get("timestamp");
+                    timeStamp = (int)instruction.get("timeStamp");
                     //Date timeStampDate = (Date)instruction.get("timestamp");
                     round++;
                     handleEvents();
@@ -185,5 +212,17 @@ public class GameActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    //DOUGS
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }
