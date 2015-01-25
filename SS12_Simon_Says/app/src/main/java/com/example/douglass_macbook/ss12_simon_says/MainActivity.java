@@ -11,7 +11,7 @@ import com.parse.Parse;
 
 public class MainActivity extends ActionBarActivity {
 
-    static boolean firstStart = false;
+    static boolean parseInitialized = false;
     Button button_startGame;
     Button button_help;
 
@@ -42,9 +42,10 @@ public class MainActivity extends ActionBarActivity {
         // Parse stuff:
         // Enable Local Datastore.
         // We only want these two lines to be called one time
-        if (!firstStart){
+        if (!parseInitialized){
             Parse.enableLocalDatastore(this);
             Parse.initialize(this, "9yqUakCzEIKfujACCHu063LqshOLUZrySAspjCO9", "rV1JpxIniI8YBl6dt5lG0bFj6r0TtE2uHUIn3Rx1");
+            parseInitialized = true;
         }
     }
 

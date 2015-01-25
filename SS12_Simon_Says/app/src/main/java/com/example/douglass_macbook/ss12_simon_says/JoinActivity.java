@@ -41,12 +41,6 @@ public class JoinActivity extends ActionBarActivity {
         //update users to list
         updateUsers();
 
-        //"signing us user"
-        user = new ParseObject("User");
-        user.saveInBackground();
-        user.put("lives", "3");
-        userId = user.getObjectId();
-
         // Get player number
         ParseCloud.callFunctionInBackground("join",
                 new HashMap<String, Object>(),
@@ -69,18 +63,6 @@ public class JoinActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     startGame();
-                    //check if there are other users
-//                    ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
-//                    query.findInBackground(new FindCallback<ParseObject>() {
-//                        @Override
-//                        public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
-//                                if (e == null && parseObjects.size()>1) {
-//                                //Toast.makeText(getApplicationContext(), Integer.toString(parseObjects.size()), Toast.LENGTH_SHORT).show();
-//                            } else {
-//                                Toast.makeText(getApplicationContext(), "Need at least two users!", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
                 }
         });
     }
