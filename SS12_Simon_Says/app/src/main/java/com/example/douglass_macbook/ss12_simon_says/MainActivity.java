@@ -20,7 +20,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         button_startGame = (Button)findViewById(R.id.button_startgame);
         button_startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +47,6 @@ public class MainActivity extends ActionBarActivity {
             parseInitialized = true;
         }
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

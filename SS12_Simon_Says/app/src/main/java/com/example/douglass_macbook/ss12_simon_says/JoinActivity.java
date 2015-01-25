@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
