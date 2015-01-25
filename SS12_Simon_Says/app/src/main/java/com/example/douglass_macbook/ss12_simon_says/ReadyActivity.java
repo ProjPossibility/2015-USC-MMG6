@@ -30,58 +30,65 @@ public class ReadyActivity extends ActionBarActivity {
         setContentView(R.layout.activity_ready);
         imageView_winner = (ImageView)findViewById(R.id.winner_image);
         // Start ready signal going
-        timer.schedule(sendReadySignal, 0);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sendReadySignal();
+            }
+        }, 0);
     }
 
-    protected TimerTask sendReadySignal = new TimerTask() {
-        @Override
-        public void run() {
-            // Make params
-            HashMap<String, Object> params = new HashMap<String, Object>();
-            params.put("playerNumber", GameActivity.currentPlayerNumId);
+    protected void sendReadySignal() {
+        // Make params
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("playerNumber", GameActivity.currentPlayerNumId);
 
-            // Call "ready" function
-            ParseCloud.callFunctionInBackground("ready", params,
-                    new FunctionCallback<HashMap<String, Object>>() {
-                        @Override
-                        public void done(HashMap<String, Object> result, com.parse.ParseException e) {
-                            if (e == null) { // i.e. no error
-                                String response = (String) result.get("response");
-                                if (response.equals("wait")) {
-                                    // Send the Ready signal again after half a second
-                                    timer.schedule(sendReadySignal, 500);
-                                } else if (response.equals("end")) {
-                                    // Navigate to EndActivity
-                                    endGame(result);
-                                } else { // assume we got a valid instruction
-                                    // Set the static instruction object in GameActivity
-                                    GameActivity.instruction = result;
+        // Call "ready" function
+        ParseCloud.callFunctionInBackground("ready", params,
+                new FunctionCallback<HashMap<String, Object>>() {
+                    @Override
+                    public void done(HashMap<String, Object> result, com.parse.ParseException e) {
+                        if (e == null) { // i.e. no error
+                            String response = (String) result.get("response");
+                            if (response.equals("wait")) {
+                                // Send the Ready signal again after half a second
+                                timer.schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        sendReadySignal();
+                                    }
+                                }, 500);
+                            } else if (response.equals("end")) {
+                                // Navigate to EndActivity
+                                endGame(result);
+                            } else { // assume we got a valid instruction
+                                // Set the static instruction object in GameActivity
+                                GameActivity.instruction = result;
 
-                                    // Schedule the game to start
-                                    Long startTimeMilliseconds = (Long)result.get("timeStamp");
-                                    if(startTimeMilliseconds != null) {
-                                        // Make sure startTimeMilliseconds isn't in the past
-                                        long nowMilliseconds = new Date().getTime();
-                                        if(nowMilliseconds < startTimeMilliseconds) {// Schedule the start game
-                                            timer.schedule(new TimerTask() {
-                                                @Override
-                                                public void run() {
-                                                    // Navigate to GameActivity
-                                                    startGame();
-                                                }
-                                            }, new Date(startTimeMilliseconds));
-                                        }
-                                        else { // i.e. startTimeMilliseconds is in the past
-                                            // Navigate to GameActivity
-                                            startGame();
-                                        }
+                                // Schedule the game to start
+                                Long startTimeMilliseconds = (Long)result.get("timeStamp");
+                                if(startTimeMilliseconds != null) {
+                                    // Make sure startTimeMilliseconds isn't in the past
+                                    long nowMilliseconds = new Date().getTime();
+                                    if(nowMilliseconds < startTimeMilliseconds) {// Schedule the start game
+                                        timer.schedule(new TimerTask() {
+                                            @Override
+                                            public void run() {
+                                                // Navigate to GameActivity
+                                                startGame();
+                                            }
+                                        }, new Date(startTimeMilliseconds));
+                                    }
+                                    else { // i.e. startTimeMilliseconds is in the past
+                                        // Navigate to GameActivity
+                                        startGame();
                                     }
                                 }
                             }
                         }
-                    });
-        }
-    };
+                    }
+                });
+    }
 
 
 
@@ -92,7 +99,12 @@ public class ReadyActivity extends ActionBarActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        timer.schedule(sendReadySignal, 0);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sendReadySignal();
+            }
+        }, 0);
     }
 
 
