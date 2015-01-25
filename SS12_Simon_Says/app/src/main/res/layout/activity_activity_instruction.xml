@@ -35,6 +35,7 @@
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFFFFF"
+            android:textStyle="italic"
             />
 
         <Button
