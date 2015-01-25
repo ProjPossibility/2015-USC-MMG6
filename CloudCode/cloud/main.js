@@ -238,8 +238,18 @@ Parse.Cloud.define("leave", function(request, response) {
                   var queryInstr = new Parse.Query("Instruction");
                   queryInstr.find({
                     success: function(results) {
-                      if(results.length > 0) {
-                        results[0].destroy();
+                      if(results.length > 0) { // found an instruction, so delete it
+                        results[0].destroy( {
+                          success: function() {
+                            response.success({});
+                          },
+                          error: function() {
+
+                          }
+                        })
+                      }
+                      else { // no instructions found, so just return
+                        response.success({});
                       }
                     },
                     error: function(obj, error) {
@@ -247,8 +257,14 @@ Parse.Cloud.define("leave", function(request, response) {
                     }
                   });
                 }
+              },
+              error: function(obj, error) {
+
               }
             });
+          },
+          error: function(obj, error) {
+
           }
         });
       }
