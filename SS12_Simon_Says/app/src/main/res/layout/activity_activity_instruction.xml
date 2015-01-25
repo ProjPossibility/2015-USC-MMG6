@@ -18,7 +18,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/instruction"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -29,6 +30,7 @@
             android:text="@string/instruction_text"
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal"
+            android:textColor="#FFFFFF"
             />
     </LinearLayout>
 
