@@ -90,6 +90,12 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
 
+        //set score to ?
+        textView_p1.setText(roundStrings.get(0) + '?' );
+        textView_p2.setText(roundStrings.get(1) + '?' );
+        textView_p3.setText(roundStrings.get(2) + '?' );
+        textView_p4.setText(roundStrings.get(3) + '?' );
+
         textView_round = (TextView)findViewById(R.id.textView_roundNum);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
@@ -123,7 +129,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         // Simon says:
         if (simonSays) {
-            instructions += "Simon says";
+            instructions += "Simon says ";
         }
 
         // Who:
@@ -149,8 +155,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         textView_instructions.setText(instructions);
 
-
-
+        // Set timer to call go()
         // Set timer to call sensorBegin()
         //TODO start audio that reads the instruction
         timer.schedule(new TimerTask() {
@@ -359,7 +364,22 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textView_p1.setText( roundStrings.get(currentPlayerNumId - 1) + score );
+                switch(currentPlayerNumId){
+                    case 1:
+                        textView_p1.setText(roundStrings.get(0) + score );
+                        break;
+                    case 2:
+                        textView_p2.setText( roundStrings.get(1) + score );
+                        break;
+                    case 3:
+                        textView_p3.setText(roundStrings.get(2) + score );
+                        break;
+                    case 4:
+                        textView_p4.setText( roundStrings.get(3) + score );
+                        break;
+                    default:
+                        break;
+                }
             }
         });
     }
