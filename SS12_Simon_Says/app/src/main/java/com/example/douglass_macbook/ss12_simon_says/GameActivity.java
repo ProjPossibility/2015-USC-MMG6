@@ -251,7 +251,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 }
                 break;
             case 6:
-                if(userShouldDoAction()){
+                if(userShouldDoAction() && !leftRotate && !rightRotate && !forwardRotate && !backRotate){
                     //needs to stay
                     success = true;
                 }
@@ -260,7 +260,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 }
                 break;
             case 7:
-                if(userShouldDoAction()){
+                if(userShouldDoAction() && (leftRotate || rightRotate || forwardRotate || backRotate)){
                     //needs to move
                     success = true;
                 }else{
