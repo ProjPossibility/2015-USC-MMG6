@@ -4,6 +4,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -26,6 +27,7 @@ import java.util.TimerTask;
 
 public class GameActivity extends ActionBarActivity implements SensorEventListener {
 
+    MediaPlayer mMediaPlayer;
     TextView textView_instructions;
     TextView textView_p1;
     TextView textView_p2;
@@ -135,6 +137,14 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         // Who:
         if (forEveryone) {
             instructions +=" everyone";
+            mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.all_players);
+            mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mMediaPlayer.release();
+                }
+            });
+            mMediaPlayer.start();
         }
         else {
             boolean comma = false;
@@ -146,11 +156,61 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
                 instructions += "Player " + i;
             }
+            mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.player_1);
+            mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mMediaPlayer.release();
+                }
+            });
+            mMediaPlayer.start();
         }
 
         // Action:
         if (action >= 0 && action <= 14) {
             instructions += " " + actionsArray.get(action);
+            switch(action){
+                case 0:
+                    mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.rotate_left);
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mMediaPlayer.release();
+                        }
+                    });
+                    mMediaPlayer.start();
+                    break;
+                case 1:
+                    mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.rotate_right);
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mMediaPlayer.release();
+                        }
+                    });
+                    mMediaPlayer.start();
+                    break;
+                case 2:
+                    mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.rotate_backward);
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mMediaPlayer.release();
+                        }
+                    });
+                    mMediaPlayer.start();
+                    break;
+                case 3:
+                    mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.rotate_forward);
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mMediaPlayer.release();
+                        }
+                    });
+                    mMediaPlayer.start();
+                    break;
+            }
         }
 
         textView_instructions.setText(instructions);

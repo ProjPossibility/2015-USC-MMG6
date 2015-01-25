@@ -64,7 +64,7 @@ public class JoinActivity extends ActionBarActivity {
             });
 
         // Play welcome message
-        mMediaPlayer = MediaPlayer.create(JoinActivity.this, R.raw.welcome);
+        mMediaPlayer = MediaPlayer.create(JoinActivity.this, R.raw.join_menu);
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
