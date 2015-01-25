@@ -29,7 +29,7 @@
             android:layout_height="0px"
             android:layout_margin="10dp"
             android:background="#222222"
-            android:layout_weight="6"
+            android:layout_weight="18"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/instruction_text"
             android:id="@+id/textView2"

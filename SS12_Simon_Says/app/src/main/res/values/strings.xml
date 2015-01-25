@@ -16,7 +16,9 @@
     <string name="instruction_simon">Simon Says</string>
     <string name="help">Help</string>
     <string name="start_game">Start Game</string>
-    <string name="instruction_text">INSTRUCTIONS FOR GAME FILL HERE</string>
+    <string name="instruction_text">To play hold phone face up and memorize your assigned number, (which may change). Only instructions given by Simon are valid, if you follow them you will gain points.  But make sure to only do the instructions directed at you (your number, everyone). The point of the game is to acquire the highest score within 7 rounds of Simon Says.
+To continue to the game please press return on the bottom screen.
+</string>
     <string name="please_wait">Please wait...</string>
     <string name="welcome">Hello and Welcome!</string>
 
