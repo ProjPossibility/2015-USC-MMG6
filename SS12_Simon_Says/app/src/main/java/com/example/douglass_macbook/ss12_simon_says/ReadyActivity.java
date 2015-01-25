@@ -132,7 +132,7 @@ public class ReadyActivity extends ActionBarActivity {
         }
 
 
-        // Schedule returning back to JoinActivity
+        // Schedule returning back to MainActivity (not JoinActivity to avoid duplicate players)
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -143,7 +143,11 @@ public class ReadyActivity extends ActionBarActivity {
                         imageView_winner.setVisibility(View.GONE);
                     }
                 });
-                finish();
+                // Return to MainMenu
+                Intent intentToMain = new Intent(getApplicationContext(), MainActivity.class);
+                intentToMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentToMain);
+
             }
         }, 4500);
     }
