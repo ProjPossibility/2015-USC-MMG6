@@ -31,7 +31,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="10"
                 android:textSize="50sp"
-                android:background="#8499F9"
+                android:background="#111111"
                 android:layout_margin="10dp"/>
 
             <Button
@@ -40,7 +40,7 @@
                 android:text="@string/help"
                 android:id="@+id/button2"
                 android:layout_gravity="center_horizontal"
-                android:background="#012793"
+                android:background="#ee881f"
                 android:layout_weight="10"
                 android:textSize="60sp"
                 android:layout_margin="10dp"/>
