@@ -165,10 +165,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go left
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 1:
@@ -176,10 +176,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go right
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 2:
@@ -187,9 +187,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go up
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 3:
@@ -197,10 +197,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go down
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 4:
@@ -208,10 +208,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go punch
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 5:
@@ -219,10 +219,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to elbow
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 6:
@@ -230,10 +230,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to stay
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 7:
@@ -241,9 +241,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to move
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
             break;
             case 8:
@@ -281,7 +281,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 //            active = (ImageView)findViewById(R.id.correct_image);
 //        }
 //        else if( status.equalsIgnoreCase("cross") ){
-            imageView_cross.setVisibility(View.VISIBLE);
+            //imageView_cross.setVisibility(View.VISIBLE);
 //          }
 //        else if(status.equalsIgnoreCase("go")){
 //            active = (ImageView)findViewById(R.id.go_image);
