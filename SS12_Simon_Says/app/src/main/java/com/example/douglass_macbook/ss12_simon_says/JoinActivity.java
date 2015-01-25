@@ -1,6 +1,7 @@
 package com.example.douglass_macbook.ss12_simon_says;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import java.util.TimerTask;
 
 public class JoinActivity extends ActionBarActivity {
 
+    MediaPlayer mMediaPlayer;
     Button start_button;
     ParseObject user;
     TextView userID;
@@ -45,30 +47,40 @@ public class JoinActivity extends ActionBarActivity {
 
         // Get player number
         ParseCloud.callFunctionInBackground("join",
-                new HashMap<String, Object>(),
-                new FunctionCallback<Integer>() {
-                    @Override
-                    public void done(Integer receivedPlayerNumber, com.parse.ParseException e) {
-                        if (e == null) {
-                            GameActivity.currentPlayerNumber = receivedPlayerNumber;
-                            GameActivity.currentPlayerNumId = receivedPlayerNumber;
-                            userID.append(Integer.toString( receivedPlayerNumber ));
-
-                            //TODO maybe: enable the start button
-                        } else {
-                            Toast.makeText(getApplicationContext(), "ParseException", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-            //assign this to match xml button
-            start_button = (Button) findViewById(R.id.button_start);
-            start_button.setOnClickListener( new View.OnClickListener() {
+            new HashMap<String, Object>(),
+            new FunctionCallback<Integer>() {
                 @Override
-                public void onClick(View v) {
-                    startGame();
+                public void done(Integer receivedPlayerNumber, com.parse.ParseException e) {
+                    if (e == null) {
+                        GameActivity.currentPlayerNumber = receivedPlayerNumber;
+                        GameActivity.currentPlayerNumId = receivedPlayerNumber;
+                        userID.append(Integer.toString( receivedPlayerNumber ));
+
+                        //TODO maybe: enable the start button
+                    } else {
+                        Toast.makeText(getApplicationContext(), "ParseException", Toast.LENGTH_LONG).show();
+                    }
                 }
+            });
+
+        // Play welcome message
+        mMediaPlayer = MediaPlayer.create(JoinActivity.this, R.raw.welcome);
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mMediaPlayer.release();
+            }
         });
+        mMediaPlayer.start();
+
+        //assign this to match xml button
+        start_button = (Button) findViewById(R.id.button_start);
+        start_button.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
+            }
+    });
 
         // Start pinging the server for list of users
         timer.schedule(new TimerTask() {
