@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.parse.FunctionCallback;
 import com.parse.Parse;
@@ -33,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, JoinActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                MainActivity.this.startActivityForResult(myIntent, 1);
             }
         });
 
@@ -42,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, ActivityInstruction.class);
-                MainActivity.this.startActivityForResult(myIntent, 0);
+                MainActivity.this.startActivityForResult(myIntent, 1);
             }
         });
 
