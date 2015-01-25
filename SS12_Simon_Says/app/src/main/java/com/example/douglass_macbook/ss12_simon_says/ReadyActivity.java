@@ -36,8 +36,12 @@ public class ReadyActivity extends ActionBarActivity {
     protected TimerTask sendReadySignal = new TimerTask() {
         @Override
         public void run() {
-            //TODO send playerNumber in the hashmap
-            ParseCloud.callFunctionInBackground("ready", new HashMap<String, Object>(),
+            // Make params
+            HashMap<String, Object> params = new HashMap<String, Object>();
+            params.put("playerNumber", GameActivity.currentPlayerNumId);
+
+            // Call "ready" function
+            ParseCloud.callFunctionInBackground("ready", params,
                     new FunctionCallback<HashMap<String, Object>>() {
                         @Override
                         public void done(HashMap<String, Object> result, com.parse.ParseException e) {
