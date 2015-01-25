@@ -121,7 +121,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         }
         //insert instructions
         if (action >= 0 && action <= 14) {
-            insert = actionsArray.get(action).toString();
+            insert = actionsArray.get(action);
             textView_instructions.append(" " + insert);
         }
 
