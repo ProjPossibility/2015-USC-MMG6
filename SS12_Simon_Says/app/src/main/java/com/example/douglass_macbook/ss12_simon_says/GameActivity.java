@@ -348,10 +348,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         });
     }
     boolean userShouldDoAction(){
-        if (action==currentPlayerNumber)
-            return true;
-        else
-            return false;
+        return (who.contains(currentPlayerNumId)) && (simonSays);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
