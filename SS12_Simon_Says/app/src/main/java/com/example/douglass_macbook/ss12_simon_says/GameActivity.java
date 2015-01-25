@@ -131,7 +131,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         // Simon says:
         if (simonSays) {
-            textView_instructions.append("Simon says");
+            textView_instructions.append("Simon says ");
 
             mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.simon_says);
             mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -237,7 +237,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             public void run() {
                 sensorBegin();
             }
-        }, 800);
+        }, 1600);
     }
 
     private void sensorBegin() {
