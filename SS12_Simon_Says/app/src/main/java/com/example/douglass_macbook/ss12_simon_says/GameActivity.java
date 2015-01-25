@@ -15,6 +15,7 @@ public class GameActivity extends ActionBarActivity {
     TextView textView_p3;
     TextView textView_p4;
     TextView textView_round;
+    int round = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class GameActivity extends ActionBarActivity {
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
         textView_round = (TextView)findViewById(R.id.textView_round);
+
 
 
     }
