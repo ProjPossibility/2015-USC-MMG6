@@ -123,7 +123,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         // Simon says:
         if (simonSays) {
-            instructions += "Simon says";
+            instructions += "Simon says ";
         }
 
         // Who:
@@ -148,8 +148,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         }
 
         textView_instructions.setText(instructions);
-
-
 
         // Set timer to call go()
         //TODO start audio that reads the instruction
@@ -369,7 +367,22 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textView_p1.setText( roundStrings.get(currentPlayerNumId - 1) + score );
+                switch(currentPlayerNumId){
+                    case 1:
+                        textView_p1.setText( score );
+                        break;
+                    case 2:
+                        textView_p2.setText( score );
+                        break;
+                    case 3:
+                        textView_p3.setText( score );
+                        break;
+                    case 4:
+                        textView_p4.setText( score );
+                        break;
+                    default:
+                        break;
+                }
             }
         });
     }
