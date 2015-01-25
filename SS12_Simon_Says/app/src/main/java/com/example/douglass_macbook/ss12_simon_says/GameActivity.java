@@ -117,66 +117,75 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         timeStamp = (long)instruction.get("timeStamp");
 
         // Start the sequence
-        displayInstructions();
+        sequenceSimonSays();
     }
 
-    private void displayInstructions() {
+    private void sequenceSimonSays() {
         // Update round counter
         round++;
         textView_round.setText(Integer.toString(round));
 
         // // Update instructions
 
-        String instructions = "";
+        textView_instructions.setText("");
 
         // Simon says:
         if (simonSays) {
-            instructions += "Simon says ";
+            textView_instructions.append("Simon says");
+
             mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.simon_says);
             mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     mMediaPlayer.release();
+                    sequenceWho();
                 }
             });
             mMediaPlayer.start();
         }
-
+    }
+    private void sequenceWho() {
         // Who:
         if (forEveryone) {
-            instructions +=" everyone";
+            textView_instructions.append(" Everyone");
+
+            // Everyone
             mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.all_players);
             mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     mMediaPlayer.release();
+                    sequenceAction();
                 }
             });
             mMediaPlayer.start();
-        }
-        else {
+        } else {
             boolean comma = false;
-            for(int i : who) {
-                if(comma) {
-                    instructions +=", ";
+            for (int i : who) {
+                if (comma) {
+                    textView_instructions.append(", ");
                 }
                 comma = true;
 
-                instructions += "Player " + i;
+                textView_instructions.append("Player " + i);
             }
+
+            // Just player 1
             mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.player_1);
             mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     mMediaPlayer.release();
+                    sequenceAction();
                 }
             });
             mMediaPlayer.start();
         }
-
+    }
+    private void sequenceAction() {
         // Action:
         if (action >= 0 && action <= 14) {
-            instructions += " " + actionsArray.get(action);
+            textView_instructions.append(" " + actionsArray.get(action));
             switch(action){
                 case 0:
                     mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.rotate_left);
@@ -221,17 +230,14 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             }
         }
 
-        textView_instructions.setText(instructions);
-
         // Set timer to call go()
         // Set timer to call sensorBegin()
-        //TODO start audio that reads the instruction
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 sensorBegin();
             }
-        }, 2000);
+        }, 800);
     }
 
     private void sensorBegin() {
