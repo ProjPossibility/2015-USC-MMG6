@@ -326,47 +326,26 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
 
 
-    private void displayImage(final ImageView whichImage, int visibility) {
+    private void displayImage(final ImageView whichImage, final int visibility) {
         if(whichImage != null)
         {
-            if(visibility == View.VISIBLE) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        whichImage.setVisibility(View.VISIBLE);
-                    }
-                });
-            }
-            else
-            {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        whichImage.setVisibility(View.GONE);
-                    }
-                });
-            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    whichImage.setVisibility(visibility);
+                }
+            });
         }
     }
 
     private void updatePlayerScore(int playerScore) {
-        String score = Integer.toString(playerScore);
-        switch(currentPlayerNumId){
-            case 1:
-                textView_p1.setText( roundStrings.get(0) + score );
-                break;
-            case 2:
-                textView_p2.setText(roundStrings.get(1) +score);
-                break;
-            case 3:
-                textView_p3.setText(roundStrings.get(2) +score);
-                break;
-            case 4:
-                textView_p4.setText(roundStrings.get(3) +score);
-                break;
-            default:
-                break;
-        }
+        final String score = Integer.toString(playerScore);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textView_p1.setText( roundStrings.get(currentPlayerNumId - 1) + score );
+            }
+        });
     }
     boolean userShouldDoAction(){
         if (action==currentPlayerNumber)
