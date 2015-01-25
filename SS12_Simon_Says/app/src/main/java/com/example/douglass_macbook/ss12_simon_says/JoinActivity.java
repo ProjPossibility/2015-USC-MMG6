@@ -24,7 +24,6 @@ import java.util.TimerTask;
 public class JoinActivity extends ActionBarActivity {
 
     Button start_button;
-    String userId;
     ParseObject user;
     TextView userID;
     ListView userList;
@@ -41,9 +40,6 @@ public class JoinActivity extends ActionBarActivity {
         userID = (TextView)findViewById(R.id.textView_title);
         userList = (ListView)findViewById(R.id.listView);
 
-        //update users to list
-        updateUsers();
-
         // Get player number
         ParseCloud.callFunctionInBackground("join",
                 new HashMap<String, Object>(),
@@ -53,6 +49,8 @@ public class JoinActivity extends ActionBarActivity {
                         if (e == null) {
                             GameActivity.currentPlayerNumber = receivedPlayerNumber;
                             GameActivity.currentPlayerNumId = receivedPlayerNumber;
+                            userID.append(Integer.toString( receivedPlayerNumber ));
+
                             //TODO maybe: enable the start button
                         } else {
                             Toast.makeText(getApplicationContext(), "ParseException", Toast.LENGTH_LONG).show();
