@@ -85,6 +85,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         textView_p2 = (TextView)findViewById(R.id.textView_P2);
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
+
+
         textView_round = (TextView)findViewById(R.id.textView_roundNum);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
@@ -103,20 +105,42 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             @Override
             public void done(HashMap<String, Object> instruction, com.parse.ParseException e) {
                 if (e == null) {
-                    simonSays = (boolean)instruction.get("simonSays");
-                    arraylist = (ArrayList<Integer>) instruction.get("who");
-                    action = (int)instruction.get("action");
-                    timeStamp = (long)instruction.get("timeStamp");
+
+
+//                  simonSays = (boolean)instruction.get("simonSays");
+//                  arraylist = (ArrayList<Integer>) instruction.get("who");
+//                  action = (int)instruction.get("action");
+//                  timeStamp = (long)instruction.get("timeStamp");
+
+
+                    //timeStamp = (long)instruction.get("timeStamp");
+
                     //Date timeStampDate = (Date)instruction.get("timestamp");
 
+
+                    //testing
                     //SET PLAYER NUM ID
                     handleEvents();
-
                     } else {
                         Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
                     }
                 }
             });
+
+        //test events handling
+        //testing
+
+        //Sample input to test screens
+        simonSays = true;
+        arraylist = new ArrayList<Integer>();
+        arraylist.add(1);
+        arraylist.add(2);
+        arraylist.add(3);
+        arraylist.add(4);
+        action = 0;
+
+        //SET PLAYER NUM ID
+        handleEvents();
     }
 
     private void handleEvents() {
