@@ -48,8 +48,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     int action;
     int playerScore = 0;
     long timeStamp;
-    int currentPlayerNumber;
-    int currentPlayerNumId;
+    static int currentPlayerNumber;
+    static int currentPlayerNumId;
+    static HashMap<String, Object> instruction;
     int max_players = 4;
     ArrayList <Integer> arraylist;
     List<String> actionsArray;
@@ -96,34 +97,11 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         updatePlayerScore(playerScore);
 
-        ParseCloud.callFunctionInBackground("get_instruction",
-            new HashMap<String, Object>(),
-            new FunctionCallback<HashMap<String, Object>>()
-            {
-            @Override
-            public void done(HashMap<String, Object> instruction, com.parse.ParseException e) {
-                if (e == null) {
-
-
-//                  simonSays = (boolean)instruction.get("simonSays");
-//                  arraylist = (ArrayList<Integer>) instruction.get("who");
-//                  action = (int)instruction.get("action");
-//                  timeStamp = (long)instruction.get("timeStamp");
-
-
-                    //timeStamp = (long)instruction.get("timeStamp");
-
-                    //Date timeStampDate = (Date)instruction.get("timestamp");
-
-
-                    //testing
-                    //SET PLAYER NUM ID
-                    handleEvents();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+        // Get data from the instruction
+        simonSays = (boolean)instruction.get("simonSays");
+        arraylist = (ArrayList<Integer>) instruction.get("who");
+        action = (int)instruction.get("action");
+        timeStamp = (long)instruction.get("timeStamp");
 
         //test events handling
         //testing

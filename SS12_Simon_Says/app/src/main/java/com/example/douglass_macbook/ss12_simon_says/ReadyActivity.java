@@ -23,13 +23,6 @@ import java.util.TimerTask;
 
 public class ReadyActivity extends ActionBarActivity {
 
-    boolean simonSays;
-    ArrayList <Integer> arraylist;
-    int action;
-    long timeStamp;
-    Date now;
-    long millis;
-
     Timer timer = new Timer();
 
     @Override
@@ -37,43 +30,7 @@ public class ReadyActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ready);
 
-
-        ParseCloud.callFunctionInBackground("get_instruction",
-                new HashMap<String, Object>(),
-                new FunctionCallback<HashMap<String, Object>>() {
-                    @Override
-                    public void done(HashMap<String, Object> instruction, com.parse.ParseException e) {
-                        if (e == null) {
-                            simonSays = (boolean) instruction.get("simonSays");
-                            arraylist = (ArrayList<Integer>) instruction.get("who");
-                            action = (int) instruction.get("action");
-                            timeStamp = (long) instruction.get("timeStamp");
-                            //Date timeStampDate = (Date)instruction.get("timestamp");
-
-                            //SET PLAYER NUM ID
-                            //handleEvents();
-
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-        now = new Date();
-        millis = now.getTime();
-
-        //get now time see if greater - if greater do immediately , else wait for time
-        if(millis>timeStamp){
-            //do immediately(go to gameActivity
-        } else {
-            //wait for time
-
-            now = new Date();
-            long millis2 = now.getTime();
-
-
-
-        }
-
+        // Start ready signal going
         timer.schedule(sendReadySignal, 0);
     }
 
@@ -81,8 +38,7 @@ public class ReadyActivity extends ActionBarActivity {
         @Override
         public void run() {
             ParseCloud.callFunctionInBackground("ready", new HashMap<String, Object>(),
-                new FunctionCallback<HashMap<String, Object>>()
-                {
+                new FunctionCallback<HashMap<String, Object>>() {
                     @Override
                     public void done(HashMap<String, Object> result, com.parse.ParseException e) {
                         if (e == null) { // i.e. no error
@@ -93,7 +49,27 @@ public class ReadyActivity extends ActionBarActivity {
                             } else if (response.equals("end")) {
                                 //TODO navigate to end activity
                             } else { // assume we got a valid instruction
-                                //TODO schedule a timer to start game
+                                // Set the static instruction object in GameActivity
+                                GameActivity.instruction = result;
+
+                                // Schedule the game to start
+                                Long startTimeMilliseconds = (Long)result.get("timeStamp");
+                                if(startTimeMilliseconds != null) {
+                                    // Make sure startTimeMilliseconds isn't in the past
+                                    long nowMilliseconds = new Date().getTime();
+                                    if(nowMilliseconds > startTimeMilliseconds) {
+                                        // Schedule it for half a second ahead of now
+                                        startTimeMilliseconds = nowMilliseconds + 500;
+                                    }
+
+                                    // Schedule the start game
+                                    timer.schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            //TODO navigate to GameActivity / start the game
+                                        }
+                                    }, new Date(startTimeMilliseconds));
+                                }
                             }
                         }
                     }
