@@ -138,6 +138,7 @@ Parse.Cloud.define("ready", function(request, response) {
               var responseObj = {
                 response: "instruction",
                 simonSays: results[0].get("simonSays"),
+                forEveryone: results[0].get("forEveryone"),
                 who: results[0].get("who"),
                 action: results[0].get("action"),
                 timeStamp: results[0].get("timeStamp")
@@ -151,7 +152,8 @@ Parse.Cloud.define("ready", function(request, response) {
               var responseObj = {
                 response: "instruction",
                 simonSays: simonSays(),
-                who: everyone(),
+                forEveryone: forEveryone();
+                who: who(),
                 action: actionNumber(),
                 timeStamp: getTime()
               }
@@ -160,6 +162,7 @@ Parse.Cloud.define("ready", function(request, response) {
               var Instruction = Parse.Object.extend("Instruction");
               var newInstruction = new Instruction();
               newInstruction.set("simonSays", responseObj.simonSays);
+              newInstruction.set("forEveryone", responseObj.forEveryone);
               newInstruction.set("who", responseObj.who);
               newInstruction.set("action", responseObj.action);
               newInstruction.set("timeStamp", responseObj.timeStamp);
@@ -270,7 +273,7 @@ Parse.Cloud.define("leave", function(request, response) {
 
 function simonSays() {
 	var generated = Math.random();
-	if (generated > 0.8) {
+	if (generated < 0.8) {
 		//do a simon says
 		return true;
 	}
@@ -279,14 +282,18 @@ function simonSays() {
 	}
 }
 
-function everyone() {
-	return [1,2,3,4];
+function forEveryone() {
+  return false; //TODO change this to return randomly chosen true or false, perhaps 60% true
+}
+
+function who() {
+  return [1,2,3,4]; //TODO change this to chose a subset of them
 }
 
 function actionNumber() {
 	// var generated = Math.random()*15.0;
 	// return generated;
-	return 1;
+	return 0;
 }
 
 function getTime() { 

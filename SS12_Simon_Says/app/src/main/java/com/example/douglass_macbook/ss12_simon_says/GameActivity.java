@@ -39,7 +39,11 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     ImageView imageView_winner;
 
     int round = 1;
+
     boolean simonSays;
+    boolean forEveryone;
+    ArrayList <Integer> who;
+
     boolean leftRotate = false;
     boolean rightRotate = false;
     boolean forwardRotate = false;
@@ -51,7 +55,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     static int currentPlayerNumId;
     static HashMap<String, Object> instruction;
     int max_players = 4;
-    ArrayList <Integer> who;
     List<String> actionsArray;
 
     List<String> roundStrings = Arrays.asList("P1: ", "P2: ", "P3: ", "P4: ");
@@ -100,6 +103,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         // Get data from the instruction
         simonSays = (boolean)instruction.get("simonSays");
+        forEveryone = (boolean)instruction.get("forEveryone");
         who = (ArrayList<Integer>) instruction.get("who");
         action = (int)instruction.get("action");
         timeStamp = (long)instruction.get("timeStamp");
@@ -108,22 +112,43 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     }
 
     private void displayInstructions() {
+        // Update round counter
         round++;
-        String insert = Integer.toString(round);
-        textView_round.setText("insert");
-        textView_instructions.setText("");
+        textView_round.setText(Integer.toString(round));
+
+        // // Update instructions
+
+        String instructions = "";
+
+        // Simon says:
         if (simonSays) {
-            textView_instructions.setText("Simon says");
+            instructions += "Simon says";
         }
-        if (max_players == who.size()) {
-            //everyone
-            textView_instructions.append(" everyone");
+
+        // Who:
+        if (forEveryone) {
+            instructions +=" everyone";
         }
-        //insert instructions
+        else {
+            boolean comma = false;
+            for(int i : who) {
+                if(comma) {
+                    instructions +=", ";
+                }
+                comma = true;
+
+                instructions += "Player " + i;
+            }
+        }
+
+        // Action:
         if (action >= 0 && action <= 14) {
-            insert = actionsArray.get(action);
-            textView_instructions.append(" " + insert);
+            instructions += " " + actionsArray.get(action);
         }
+
+        textView_instructions.setText(instructions);
+
+
 
         // Set timer to call go()
         //TODO start audio that reads the instruction
@@ -348,7 +373,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         });
     }
     boolean userShouldDoAction(){
-        return (who.contains(currentPlayerNumId)) && (simonSays);
+        return (forEveryone || who.contains(currentPlayerNumId)) && (simonSays);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
