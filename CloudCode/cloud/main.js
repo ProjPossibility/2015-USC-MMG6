@@ -128,6 +128,7 @@ Parse.Cloud.define("ready", function(request, response) {
 
               // Build responseObj
               var responseObj = {
+                response: "instruction",
                 simonSays: simonSays(),
                 who: everyone(),
                 action: actionNumber(),

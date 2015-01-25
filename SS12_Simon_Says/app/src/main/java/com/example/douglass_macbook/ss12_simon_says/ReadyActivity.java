@@ -60,7 +60,7 @@ public class ReadyActivity extends ActionBarActivity {
                             } else if (response.equals("end")) {
                                 // Navigate to EndActivity
                                 endGame(result);
-                            } else { // assume we got a valid instruction
+                            } else if (response.equals("instruction")) {
                                 // Set the static instruction object in GameActivity
                                 GameActivity.instruction = result;
 
