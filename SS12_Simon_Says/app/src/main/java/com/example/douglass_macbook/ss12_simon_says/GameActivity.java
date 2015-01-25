@@ -154,15 +154,13 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             //everyone
             textView_instructions.append(" everyone");
         }
-        else{
-            //just some people
-            for(int i = 0; i<arraylist.size(); i++ ){
-                insert = arraylist.get(i).toString();
-                textView_instructions.append(" "+insert);
-                if( action>=0 &&  action <=14){
-                    insert = actionsArray.get(action);
-                    textView_instructions.append(insert);
-                }
+        //just some people
+        for(int i = 0; i<arraylist.size(); i++ ){
+            insert = arraylist.get(i).toString();
+            textView_instructions.append(" "+insert);
+            if( action>=0 &&  action <=14){
+                insert = actionsArray.get(action);
+                textView_instructions.append(insert);
             }
         }
         switch(action){
@@ -171,10 +169,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go left
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 1:
