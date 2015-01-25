@@ -13,6 +13,7 @@ import com.parse.Parse;
 public class MainActivity extends ActionBarActivity {
 
     Button button_startGame;
+    Button button_help;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,15 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, JoinActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+        button_help = (Button)findViewById(R.id.button_help);
+        button_help.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, ActivityInstruction.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

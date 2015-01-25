@@ -29,8 +29,8 @@ public class GameActivity extends ActionBarActivity {
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
         textView_round = (TextView)findViewById(R.id.textView_round);
 
-    }
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
