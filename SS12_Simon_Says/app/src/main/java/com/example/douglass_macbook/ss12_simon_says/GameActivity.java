@@ -22,6 +22,11 @@ public class GameActivity extends ActionBarActivity {
     TextView textView_p4;
     TextView textView_round;
     int round = 1;
+    boolean simonSays;
+    int [] who;
+    int action;
+    int timeStamp;
+    int currentNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +45,12 @@ public class GameActivity extends ActionBarActivity {
             @Override
             public void done(HashMap<String, Object> instruction, com.parse.ParseException e) {
                 if (e == null) {
-                    boolean simonSays = (boolean)instruction.get("simon_says");
-                    int [] who = (int[])instruction.get("who");
-                    int action = (int)instruction.get("action");
-                    Date timeStamp = (Date)instruction.get("timestamp");
+                    simonSays = (boolean)instruction.get("simonSays");
+                    who = (int[])instruction.get("who");
+                    action = (int)instruction.get("actionNumber");
+                    timeStamp = (int)instruction.get("timestamp");
+                    //Date timeStampDate = (Date)instruction.get("timestamp");
+                    round++;
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
