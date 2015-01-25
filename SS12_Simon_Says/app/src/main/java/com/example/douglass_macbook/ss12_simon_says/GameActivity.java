@@ -18,7 +18,6 @@ import com.parse.ParseCloud;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -64,7 +63,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private long mLastUpdateTime;
-    private boolean detect;
 
     // Constants
     public static final int SENSOR_UPDATE_DELAY = 100;
@@ -81,7 +79,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         //dougStuff
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        detect = false;
 
         //setting textviews
         textView_instructions = (TextView)findViewById(R.id.textView_instruction);
@@ -155,7 +152,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     }
 
     private void sensorBegin() {
-        //TODO turn on sensor
+        // Register accelerometer to turn it on
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
         // Set timer to call sensorEnd()
         timer.schedule(new TimerTask() {
@@ -167,14 +165,14 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     }
 
     private void sensorEnd() {
-        //TODO turn off sensor and figure out what action they actually did
-
+        // Pause the sensor
+        mSensorManager.unregisterListener(this, mAccelerometer);
 
         // Detect success or fail
         boolean success = false;
         switch(action){
             case 0:
-                if(userShouldDoAction() && leftRotate){
+                if(userShouldDoAction() && leftRotate && !rightRotate){
                     //needs to go left
                     success = true;
                 }
@@ -183,7 +181,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 }
                 break;
             case 1:
-                if(userShouldDoAction() && rightRotate){
+                if(userShouldDoAction() && rightRotate && !leftRotate){
                     //needs to go right
                     success = true;
                 }
@@ -322,6 +320,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     private void resetSensors() {
         leftRotate = false;
         rightRotate = false;
+        forwardRotate = false;
+        backRotate = false;
     }
 
 
@@ -406,13 +406,22 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 values[1] /= norm;
                 values[2] /= norm;
 
-                // Detect rotation
+                // Detect x-rotation
                 if (values[0] > ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Left rotate detected", Toast.LENGTH_SHORT).show();
                     leftRotate = true;
                 } else if (values[0] < -ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Right rotate detected", Toast.LENGTH_SHORT).show();
                     rightRotate = true;
+                }
+
+                // Detect y-rotation
+                if (values[1] > ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Forward rotate detected", Toast.LENGTH_SHORT).show();
+                    forwardRotate = true;
+                } else if (values[1] < -ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Back rotate detected", Toast.LENGTH_SHORT).show();
+                    backRotate = true;
                 }
             }
         }
@@ -421,15 +430,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     @Override
     protected void onResume () {
         super.onResume();
-
-        // Register sensors, rendering them active
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
     @Override
     protected void onPause () {
         super.onPause();
-        // Pause the sensor
-        mSensorManager.unregisterListener(this, mAccelerometer);
     }
 
     @Override
