@@ -95,34 +95,55 @@ Parse.Cloud.define("ready", function(request, response) {
         }
       }
 
-      // if not all ready, respond with "wait"
+
+
+      // ================ Respond with "wait" ================
       if(!allReady) {
+
         response.success({
           response: "wait",
           maxScore: maxScore,
           allReady: allReady
         });
       }
+
+
+
+      // ================= Respond with "end" =================
       else if(maxScore >= MAX_SCORE) {
-        var jsonObj = {
+        var responseObj = {
           response: "end",
           players: []
         };
         for(var i = 0; i < results.length; i++) {
-          jsonObj.players.push({
+          responseObj.players.push({
             playerNumber: results[i].playerNumber,
             score: results[i].score
           });
         }
-        response.success(jsonObj);
+        response.success(responseObj);
       }
+
+
+
+      // ================ Respond with "instruction" ==================
       else {
         var queryInstr = new Parse.Query("Instruction");
 
         queryInstr.find({
           success: function(results) {
+            // Check if an instruction already exists
             if(results.length > 0) {
-              response.success(results[0]);
+              // Build responseObj
+              var responseObj = {
+                response: "instruction",
+                simonSays: results[0].get("simonSays"),
+                who: results[0].get("who"),
+                action: results[0].get("action"),
+                timeStamp: results[0].get("timeStamp")
+              }
+
+              response.success(responseObj);
             }
             else {
 

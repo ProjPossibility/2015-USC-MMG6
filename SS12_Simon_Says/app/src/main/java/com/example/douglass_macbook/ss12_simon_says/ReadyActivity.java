@@ -108,31 +108,44 @@ public class ReadyActivity extends ActionBarActivity {
 
 
     protected void endGame(HashMap<String, Object> result) {
-        ArrayList<HashMap<String, Object>> players = (ArrayList<HashMap<String, Object>>)result.get("players");
-        int maxScore = -1;
-        int playerNumber = 0;
-        for(HashMap<String, Object> player : players) {
-            int score = (int)player.get("score");
-            if(score > maxScore) {
-                maxScore = score;
-                playerNumber = (int)player.get("playerNumber");
+        ArrayList<HashMap<String, Object>> players = (ArrayList<HashMap<String, Object> >)result.get("players");
+        if(players != null) {
+            int maxScore = -1;
+            int playerNumber = 0;
+            for (HashMap<String, Object> player : players) {
+                int score = (int) player.get("score");
+                if (score > maxScore) {
+                    maxScore = score;
+                    playerNumber = (int) player.get("playerNumber");
+                }
+            }
+
+            // playerNumber is the winner and they have a score of maxScore
+            if (GameActivity.currentPlayerNumId == playerNumber) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageView_winner.setVisibility(View.VISIBLE);
+                    }
+                });
             }
         }
 
-        // playerNumber is the winner and they have a score of maxScore
-        if(GameActivity.currentPlayerNumId==playerNumber){
-            imageView_winner.setVisibility(View.VISIBLE);
-        }
+
         // Schedule returning back to JoinActivity
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 // Hide winner image
-                imageView_winner.setVisibility(View.GONE);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageView_winner.setVisibility(View.GONE);
+                    }
+                });
                 finish();
             }
         }, 4500);
-
     }
 
 
