@@ -37,7 +37,7 @@ Parse.Cloud.define("join", function(request, response) {
   });
 });
 
-// params: playerNumber
+// request params: playerNumber
 Parse.Cloud.define("ready", function(request, response) {
 
   // request contains user id; set that user's ready-state to be true
@@ -129,27 +129,6 @@ Parse.Cloud.define("ready", function(request, response) {
             
           }
         });
-
-        // queryInstr.get("0", {
-        //   success: function(theInstruction) {
-        //     response.success(theInstruction);
-        //   },
-        //   error: function(obj, error) {
-        //     var Instruction = Parse.Object.extend("Instruction");
-        //     var currInstruction = new Instruction();
-
-        //     currInstruction.set("simonSays", simonSays());
-        //     currInstruction.set("who", everyone());
-        //     currInstruction.set("action", actionNumber());
-        //     currInstruction.set("timeStamp", getTime());
-
-        //     // Note: hard-coded object ID
-            
-        //     currInstruction.set("objectId", "0");
-        //     currInstruction.save();
-        //     response.success(currInstruction);
-        //   }
-        // });
       }
     }
   });
@@ -174,6 +153,17 @@ Parse.Cloud.define("result", function(request, response) {
 
   var query = new Parse.Query("Player");
   var playerNumber = request.params.playerNumber;
+
+  // Set everyone's ready property to false
+  query.find({
+    success: function(results) {
+      for(var i in results) {
+        results[i].set("ready", false);
+        results[i].save();
+      }
+    }
+  });
+
   query.equalTo("playerNumber", playerNumber);
   query.find({
     success: function(results) {
@@ -192,8 +182,43 @@ Parse.Cloud.define("result", function(request, response) {
   });
 });
 
+// Current player is deleted
+// If that was the last player, delete the instruction as well
+// request params: playerNumber
 Parse.Cloud.define("leave", function(request, response) {
-  
+  var queryPlayer = new Parse.Query("Player");
+  queryPlayer.equalTo("playerNumber", request.params.playerNumber);
+  queryPlayer.find({
+    success: function(results) {
+      if(results.length > 0) {
+        results[0].destroy({
+          success: function() {
+            queryPlayer = new Parse.Query("Player");
+            queryPlayer.find({
+              success: function(results) {
+                if(results.length == 0) {
+                  var queryInstr = new Parse.Query("Instruction");
+                  queryInstr.find({
+                    success: function(results) {
+                      if(results.length > 0) {
+                        results[0].destroy();
+                      }
+                    },
+                    error: function(obj, error) {
+                      
+                    }
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+    },
+    error: function(obj, error) {
+      
+    }
+  });
 });
 
 function simonSays() {
