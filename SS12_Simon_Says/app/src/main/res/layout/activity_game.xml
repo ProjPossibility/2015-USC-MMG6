@@ -91,6 +91,7 @@
                 android:text="@string/round"
                 android:textSize="60sp"
                 android:id="@+id/textView_round"
+                android:textColor="#ee881f"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                  />
@@ -102,6 +103,7 @@
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/round_number"
+                android:textColor="#ee881f"
                 android:id="@+id/textView_roundNum"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"/>

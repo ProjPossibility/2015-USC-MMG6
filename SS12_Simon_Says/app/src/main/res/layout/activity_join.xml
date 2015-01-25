@@ -28,7 +28,7 @@
             android:shadowDy="2"
             android:shadowRadius="20"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#ee881f"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -69,8 +69,10 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textSize="50sp"
+            android:textColor="#ee881f"
             android:layout_weight="4"
-            android:textColor="#FFFFFF"/>
+            android:background="#555555"
+            />
     </LinearLayout>
 
 </RelativeLayout>

@@ -5,6 +5,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
+
+import java.util.HashMap;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -16,6 +22,11 @@ public class GameActivity extends ActionBarActivity {
     TextView textView_p4;
     TextView textView_round;
     int round = 1;
+    boolean simonSays;
+    int [] who;
+    int action;
+    int timeStamp;
+    int currentNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +41,22 @@ public class GameActivity extends ActionBarActivity {
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
         textView_round = (TextView)findViewById(R.id.textView_round);
 
+        ParseCloud.callFunctionInBackground("get_instruction", new HashMap<String, Object>(), new FunctionCallback<HashMap<String, Object>>() {
+            @Override
+            public void done(HashMap<String, Object> instruction, com.parse.ParseException e) {
+                if (e == null) {
+                    simonSays = (boolean)instruction.get("simonSays");
+                    who = (int[])instruction.get("who");
+                    action = (int)instruction.get("actionNumber");
+                    timeStamp = (int)instruction.get("timestamp");
+                    //Date timeStampDate = (Date)instruction.get("timestamp");
+                    round++;
 
-
+                } else {
+                    Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override

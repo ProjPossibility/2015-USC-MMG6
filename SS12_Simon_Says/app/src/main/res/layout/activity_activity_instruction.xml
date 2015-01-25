@@ -20,7 +20,9 @@
             android:id="@+id/textView"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#ee881f"
+            android:textStyle="bold"
+            />
 
         <TextView
             android:layout_width="fill_parent"
