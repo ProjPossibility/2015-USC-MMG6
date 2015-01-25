@@ -32,6 +32,7 @@ public class JoinActivity extends ActionBarActivity {
     ListView userList;
     Boolean gameStarted = false;
     ArrayList<Integer> arrayListUsers;
+    static int playerScore = 0;
 
     //Timer
     Timer timer = new Timer();
