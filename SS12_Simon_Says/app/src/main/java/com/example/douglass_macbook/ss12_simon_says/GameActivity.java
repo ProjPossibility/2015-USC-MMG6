@@ -137,14 +137,14 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
     private void go() {
         // Show go image
-        displayImage("go");
+        displayImage(imageView_go, View.VISIBLE);
 
         // Set timer to call sensorBegin()
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 // Hide go image
-                imageView_go.setVisibility(View.GONE);
+                displayImage(imageView_go, View.GONE);
 
                 sensorBegin();
             }
@@ -277,11 +277,11 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         {
             playerScore++;
             updatePlayerScore( playerScore );
-            displayImage("check");
+            displayImage(imageView_check, View.VISIBLE);
         }
         else
         {
-            displayImage("cross");
+            displayImage(imageView_cross, View.VISIBLE);
         }
 
         resetSensors();
@@ -305,8 +305,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             @Override
             public void run() {
                 // Hide check/cross images
-                imageView_check.setVisibility(View.GONE);
-                imageView_cross.setVisibility(View.GONE);
+                displayImage(imageView_check, View.GONE);
+                displayImage(imageView_cross, View.GONE);
 
                 // Return to ReadyActivity
                 finish();
@@ -326,19 +326,26 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
 
 
-    private void displayImage(String status) {
-        ImageView active = (ImageView)findViewById(R.id.correct_image);
-        if( status.equalsIgnoreCase("check") ){
-            imageView_check.setVisibility(View.VISIBLE);
-        }
-        else if( status.equalsIgnoreCase("cross") ){
-            imageView_cross.setVisibility(View.VISIBLE);
-        }
-        else if(status.equalsIgnoreCase("go")){
-            imageView_go.setVisibility(View.VISIBLE);
-        }
-        else if(status.equalsIgnoreCase("winner")){
-            imageView_winner.setVisibility(View.VISIBLE);
+    private void displayImage(final ImageView whichImage, int visibility) {
+        if(whichImage != null)
+        {
+            if(visibility == View.VISIBLE) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        whichImage.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+            else
+            {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        whichImage.setVisibility(View.GONE);
+                    }
+                });
+            }
         }
     }
 
