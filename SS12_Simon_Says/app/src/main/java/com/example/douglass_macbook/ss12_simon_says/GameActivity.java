@@ -148,7 +148,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
                 sensorBegin();
             }
-        }, 500);
+        }, 2000);
     }
 
     private void sensorBegin() {
@@ -161,7 +161,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             public void run() {
                 sensorEnd();
             }
-        }, 500);
+        }, 1000);
     }
 
     private void sensorEnd() {

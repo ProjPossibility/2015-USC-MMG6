@@ -7,7 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.parse.FunctionCallback;
 import com.parse.Parse;
+import com.parse.ParseCloud;
+
+import java.util.HashMap;
+import java.util.TimerTask;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -33,9 +40,23 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, ActivityInstruction.class);
-                MainActivity.this.startActivity(myIntent);
+                MainActivity.this.startActivityForResult(myIntent, 0);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Call "leave" function when this page is navigated to from either the Join, Ready, or Game pages
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("playerNumber", GameActivity.currentPlayerNumId);
+        ParseCloud.callFunctionInBackground("leave", params,
+                new FunctionCallback<HashMap<String, Object> >() {
+                    @Override
+                    public void done(HashMap<String, Object> result, com.parse.ParseException e) {
+                        // Do nothing
+                    }
+                });
     }
 
     @Override
