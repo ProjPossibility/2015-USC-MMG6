@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
@@ -96,7 +95,6 @@ public class ReadyActivity extends ActionBarActivity {
     }
 
 
-
     protected void endGame(HashMap<String, Object> result) {
         ArrayList<HashMap<String, Object>> players = (ArrayList<HashMap<String, Object>>)result.get("players");
         int maxScore = -1;
@@ -113,14 +111,12 @@ public class ReadyActivity extends ActionBarActivity {
         if(GameActivity.currentPlayerNumId==playerNumber){
             imageView_winner.setVisibility(View.VISIBLE);
         }
-
         // Schedule returning back to JoinActivity
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 // Hide winner image
                 imageView_winner.setVisibility(View.GONE);
-
                 finish();
             }
         }, 4500);

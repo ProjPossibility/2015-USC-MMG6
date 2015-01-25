@@ -6,18 +6,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class JoinActivity extends ActionBarActivity {
@@ -25,11 +25,21 @@ public class JoinActivity extends ActionBarActivity {
     Button start_button;
     String userId;
     ParseObject user;
+    TextView userID;
+    ListView userList;
+    ArrayList<String> arrayListUsers;
+    Boolean gameStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+        userID = (TextView)findViewById(R.id.textView_title);
+        userList = (ListView)findViewById(R.id.listView);
+
+        //update users to list
+        updateUsers();
 
         //"signing us user"
         user = new ParseObject("User");
@@ -53,15 +63,12 @@ public class JoinActivity extends ActionBarActivity {
                     }
                 });
 
-
             //assign this to match xml button
             start_button = (Button) findViewById(R.id.button_start);
             start_button.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     startGame();
-
                     //check if there are other users
 //                    ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
 //                    query.findInBackground(new FindCallback<ParseObject>() {
@@ -77,6 +84,16 @@ public class JoinActivity extends ActionBarActivity {
                 }
         });
     }
+
+    private void updateUsers() {
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayListUsers);
+        userList.setAdapter(adapter);
+//        arrayListUsers = new ArrayList<String>();
+//        for (int i = 0; i < arrayListUsers.length(); ++i) {
+//            list.add(values[i]);
+//        }
+    }
+
     private void startGame() {
         Intent myIntent = new Intent(JoinActivity.this, ReadyActivity.class);
         JoinActivity.this.startActivity(myIntent);
