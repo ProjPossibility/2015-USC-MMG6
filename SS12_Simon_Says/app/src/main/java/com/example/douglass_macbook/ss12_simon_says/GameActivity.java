@@ -49,7 +49,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     boolean forwardRotate = false;
     boolean backRotate = false;
     int action;
-    int playerScore = 0;
+
     long timeStamp;
     static int currentPlayerNumber;
     static int currentPlayerNumId;
@@ -105,7 +105,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         imageView_go = (ImageView) findViewById(R.id.go_image);
         imageView_winner = (ImageView) findViewById(R.id.winner_image);
 
-        updatePlayerScore(playerScore);
+        updatePlayerScore(JoinActivity.playerScore);
 
         // Get data from the instruction
         simonSays = (boolean)instruction.get("simonSays");
@@ -296,8 +296,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         if(success)
         {
-            playerScore++;
-            updatePlayerScore( playerScore );
+            JoinActivity.playerScore++;
+            updatePlayerScore( JoinActivity.playerScore );
             displayImage(imageView_check, View.VISIBLE);
         }
         else
