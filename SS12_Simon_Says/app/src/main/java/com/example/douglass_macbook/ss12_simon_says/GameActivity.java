@@ -9,10 +9,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,6 +32,12 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     TextView textView_p3;
     TextView textView_p4;
     TextView textView_round;
+
+    ImageView imageView_check;
+    ImageView imageView_cross;
+    ImageView imageView_go;
+    ImageView imageView_winner;
+
     int round = 1;
     boolean simonSays;
     boolean leftRotate = false;
@@ -77,6 +86,12 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
         textView_round = (TextView)findViewById(R.id.textView_roundNum);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
+
+        //setting imageviews
+        imageView_check = (ImageView) findViewById(R.id.correct_image);
+        imageView_cross = (ImageView) findViewById(R.id.wrong_image);
+        imageView_go = (ImageView) findViewById(R.id.go_image);
+        imageView_winner = (ImageView) findViewById(R.id.winner_image);
 
         updatePlayerScore(playerScore);
 
@@ -134,6 +149,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go left
                     playerScore++;
                     updatePlayerScore( playerScore );
+
+                }
+                else{
+
                 }
                 break;
             case 1:
