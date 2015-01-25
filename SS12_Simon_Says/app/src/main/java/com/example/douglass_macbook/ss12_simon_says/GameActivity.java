@@ -6,16 +6,15 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -86,7 +85,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
 
-
         textView_round = (TextView)findViewById(R.id.textView_roundNum);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
@@ -155,7 +153,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         if (max_players == arraylist.size()) {
             //everyone
             textView_instructions.append(" everyone");
-
         }
         else{
             //just some people
@@ -168,7 +165,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 }
             }
         }
-        //turn sensor on
         switch(action){
             case 0:
                 if(userShouldDoAction() && leftRotate){
@@ -285,10 +281,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 break;
         }
     }
-
     private void displayImage(String status) {
-        ImageView active;
-        active = (ImageView)findViewById(R.id.correct_image);
+        ImageView active = (ImageView)findViewById(R.id.correct_image);
         if( status.equalsIgnoreCase("check") ){
             active = (ImageView)findViewById(R.id.correct_image);
         }
@@ -301,6 +295,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         else if(status.equalsIgnoreCase("winner")){
             active = (ImageView)findViewById(R.id.winner_image);
         }
+        Log.d("fucccking", "shieeet");
         Calendar c = Calendar.getInstance();
         int seconds_start = c.get(Calendar.SECOND);
         int seconds_end = c.get(Calendar.SECOND);
@@ -330,7 +325,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 break;
         }
     }
-
     boolean userShouldDoAction(){
         if (action==currentPlayerNumber)
             return true;
