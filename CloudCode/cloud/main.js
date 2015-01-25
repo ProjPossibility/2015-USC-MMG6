@@ -37,6 +37,24 @@ Parse.Cloud.define("join", function(request, response) {
   });
 });
 
+// Send back a list of all the player numbers
+Parse.Cloud.define("get_players", function(request, response) {
+  var query = new Parse.Query("Player");
+  query.find({
+    success: function(results) {
+      var responseObject = [];
+      for(var i in results) {
+        responseObject.push(results[i].get("playerNumber"));
+      }
+
+      response.success(responseObject);
+    },
+    error: function() {
+
+    }
+  });
+});
+
 // request params: playerNumber
 Parse.Cloud.define("ready", function(request, response) {
 
