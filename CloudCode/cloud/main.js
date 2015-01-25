@@ -171,7 +171,7 @@ function everyone() {
 }
 
 function actionNumber() {
-	// var generated = Math.random()*16.0;
+	// var generated = Math.random()*15.0;
 	// return generated;
 	return 1;
 }

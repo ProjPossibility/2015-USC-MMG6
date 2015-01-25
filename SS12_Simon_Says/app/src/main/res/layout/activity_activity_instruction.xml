@@ -13,32 +13,41 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="0px"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/instruction"
             android:id="@+id/textView"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_gravity="center_horizontal"
             android:textColor="#ee881f"
             android:textStyle="bold"
+            android:textSize="22dp"
             />
 
-        <TextView
-            android:layout_width="fill_parent"
+        <ScrollView
+            android:layout_width="wrap_content"
             android:layout_height="0px"
-            android:layout_margin="10dp"
-            android:background="#222222"
-            android:layout_weight="6"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/instruction_text"
-            android:id="@+id/textView2"
-            android:layout_gravity="center_horizontal"
-            android:textColor="#FFFFFF"
-            />
+            android:layout_weight="18"
+            android:id="@+id/scrollView" >
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="10dp"
+                android:background="#222222"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/instruction_text"
+                android:textSize="22dp"
+                android:id="@+id/textView2"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#FFFFFF"
+                android:textStyle="italic"
+                android:paddingBottom="10dp"
+                />
+        </ScrollView>
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0px"
             android:text="Return"
             android:layout_margin="10dp"

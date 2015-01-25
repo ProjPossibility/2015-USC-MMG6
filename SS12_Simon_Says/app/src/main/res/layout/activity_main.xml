@@ -23,6 +23,27 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin">
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_new"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/welcome"
+                    android:id="@+id/textView5"
+                    android:textStyle="italic"
+                    android:textSize="30dp"/>
+
+            </LinearLayout>
+
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -31,10 +52,12 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="10"
                 android:textSize="47sp"
+
                 android:background="#222222"
                 android:layout_margin="10dp"
                 android:textColor="#DDDDDD"
-                android:drawableTop="@drawable/icon_new"
+                android:textStyle="bold"
+
                 />
 
             <Button
@@ -48,6 +71,7 @@
                 android:textSize="60sp"
                 android:layout_margin="10dp"
                 android:textColor="#ee881f"/>
+
         </LinearLayout>
 
 

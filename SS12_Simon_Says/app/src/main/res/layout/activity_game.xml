@@ -15,7 +15,8 @@
             android:textStyle="bold"
             android:layout_width="fill_parent"
             android:textColor="#FFFFFF"
-            android:layout_height="400dp"
+            android:layout_height="0px"
+            android:layout_weight="6"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/instruction"
             android:id="@+id/textView_instruction"
@@ -29,13 +30,12 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="0px"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/linearLayout"
+            android:layout_weight="1"
             android:textColor="#FFFFFF">
-
-
 
             <TextView
                 android:textStyle="bold"
@@ -78,8 +78,9 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_weight="2"
             android:background="#222222"
+            android:layout_height="0px"
             android:textColor="#FFFFFF">
 
 
@@ -108,8 +109,35 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"/>
 
-
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/go_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:src="@drawable/go2"/>
+
+        <ImageView
+            android:id="@+id/correct_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:src="@drawable/correct_action3"/>
+
+        <ImageView
+            android:id="@+id/wrong_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:src="@drawable/wrong_action"/>
+
+        <ImageView
+            android:id="@+id/winner_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:src="@drawable/winner"/>
 
     </LinearLayout>
 
