@@ -149,33 +149,26 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         textView_instructions.setText(instructions);
 
+<<<<<<< HEAD
         // Set timer to call go()
+=======
+
+
+        // Set timer to call sensorBegin()
+>>>>>>> 346c5f1a4497a74d33581149076b5caacacda24f
         //TODO start audio that reads the instruction
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                go();
+                sensorBegin();
             }
         }, 4000);
     }
 
-    private void go() {
+    private void sensorBegin() {
         // Show go image
         displayImage(imageView_go, View.VISIBLE);
 
-        // Set timer to call sensorBegin()
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // Hide go image
-                displayImage(imageView_go, View.GONE);
-
-                sensorBegin();
-            }
-        }, 2000);
-    }
-
-    private void sensorBegin() {
         // Register accelerometer to turn it on
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
@@ -183,6 +176,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                // Hide go image
+                displayImage(imageView_go, View.GONE);
+
                 sensorEnd();
             }
         }, 1000);
