@@ -48,7 +48,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     int [] who;
     int action;
     int playerScore = 0;
-    int timeStamp;
+    long timeStamp;
     int currentPlayerNumber;
     int currentPlayerNumId;
     int max_players = 4;
@@ -106,7 +106,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     simonSays = (boolean)instruction.get("simonSays");
                     arraylist = (ArrayList<Integer>) instruction.get("who");
                     action = (int)instruction.get("action");
-                    timeStamp = (int)instruction.get("timeStamp");
+                    timeStamp = (long)instruction.get("timeStamp");
                     //Date timeStampDate = (Date)instruction.get("timestamp");
 
                     //SET PLAYER NUM ID
