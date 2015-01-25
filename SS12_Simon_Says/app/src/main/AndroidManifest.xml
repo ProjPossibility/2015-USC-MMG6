@@ -31,6 +31,10 @@
             android:name=".ActivityInstruction"
             android:label="@string/title_activity_activity_instruction" >
         </activity>
+        <activity
+            android:name=".ReadyActivity"
+            android:label="@string/title_activity_ready" >
+        </activity>
     </application>
 
 </manifest>
