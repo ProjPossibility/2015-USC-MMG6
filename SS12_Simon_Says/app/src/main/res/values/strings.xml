@@ -26,43 +26,6 @@
         <item name="android:shadowRadius">2</item>
     </style>
 
-    <string-array name="instructions_action_ind">
-        <item>Go Left </item>
-        <item>Go Right </item>
-        <item>Go Up </item>
-        <item>Go Down </item>
-        <item>Punch Forward </item>
-        <item>Elbow Back </item>
-        <item>Stay Still </item>
-        <item>Move </item>
-    </string-array>
-    <string-array name="instructions_mental_ind">
-        <item>Odd Add </item>
-        <item>Even Add </item>
-        <item>Odd Subtract </item>
-        <item>Even Subtract</item>
-        <item>Add </item>
-        <item>Subtract </item>
-        <item>Double Number </item>
-    </string-array>
-    <string-array name="instructions_group">
-        <item>Go Left</item>
-        <item>Go Right</item>
-        <item>Go Up</item>
-        <item>Go Down</item>
-        <item>Punch Forward</item>
-        <item>Elbow Back</item>
-        <item>Stay Still</item>
-        <item>Move</item>
-        <item>Odd Add 7</item>
-        <item>Even Add 7</item>
-        <item>Odd Subtract 4</item>
-        <item>Even Subtract 4</item>
-        <item>Add 7</item>
-        <item>Subtract 4</item>
-        <item>Double Number</item>
-    </string-array>
-
     <string name="title_activity_game">Simon Says</string>
     <string name="title_activity_activity_instruction">Simon Says</string>
     <string name="title_activity_ready">ReadyActivity</string>

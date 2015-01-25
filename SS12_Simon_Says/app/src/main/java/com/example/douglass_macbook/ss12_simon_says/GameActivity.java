@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +30,7 @@ public class GameActivity extends ActionBarActivity {
     int timeStamp;
     int currentPlayerNumber;
     int max_players = 4;
-    List<int[]> arraylist;
+    ArrayList <Integer> arraylist;
     List<String> actionsArray;
 
     @Override
@@ -50,9 +52,8 @@ public class GameActivity extends ActionBarActivity {
             public void done(HashMap<String, Object> instruction, com.parse.ParseException e) {
                 if (e == null) {
                     simonSays = (boolean)instruction.get("simonSays");
-                    who = (int[])instruction.get("who");
-                    arraylist = Arrays.asList(who);
-                    action = (int)instruction.get("actionNumber");
+                    arraylist = (ArrayList<Integer>) instruction.get("who");
+                    action = (int)instruction.get("action");
                     timeStamp = (int)instruction.get("timestamp");
                     //Date timeStampDate = (Date)instruction.get("timestamp");
                     round++;
