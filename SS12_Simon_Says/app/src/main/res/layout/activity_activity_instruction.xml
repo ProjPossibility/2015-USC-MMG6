@@ -18,10 +18,11 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/instruction"
             android:id="@+id/textView"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_gravity="center_horizontal"
             android:textColor="#ee881f"
             android:textStyle="bold"
+            android:textSize="22dp"
             />
 
         <TextView
