@@ -3,15 +3,16 @@
 // For example:
 Parse.Cloud.define("hello", function(request, response) {
   var jsonResponse = {
-    hello: "SS12",
-    world: "Simon Says"
+    simonSays: simonSays(),
+    who: everyone(),
+    action: actionNumber(),
+    timeStamp: getTime()    
   };
   response.success(jsonResponse);
-  // response.success("SS12! ACM!");
 });
 
 function simonSays() {
-	double generated = Math.random();
+	var generated = Math.random();
 	if( generated > 0.8){
 		//do a simon says
 		return true;
@@ -21,20 +22,26 @@ function simonSays() {
 	}
 }
 
-function Everyone() {
-	double generated = Math.random();
+function everyone() {
+	var generated = Math.random();
 	if( generated > 0.7){
 		//do everyone
 		return true;
 	}
 	else{
+		//get users still in the game
+
 		return false;
 	}
 }
 
 function actionNumber() {
-	double generated = Math.random()*16.0;
+	var generated = Math.random()*16.0;
 	return generated;
+}
+
+function getTime() { 
+	return new Date().getTime(); 
 }
 
 
