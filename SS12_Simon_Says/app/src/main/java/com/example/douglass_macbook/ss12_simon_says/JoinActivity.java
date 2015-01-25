@@ -41,7 +41,7 @@ public class JoinActivity extends ActionBarActivity {
             public void done(HashMap<String, Object> map, com.parse.ParseException e) {
                 if (e == null) {
                     Toast.makeText(getApplicationContext(), (String)map.get("world"), Toast.LENGTH_LONG).show();
-                    
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "ParseException", Toast.LENGTH_LONG).show();

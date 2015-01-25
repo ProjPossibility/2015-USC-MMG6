@@ -12,7 +12,27 @@ Parse.Cloud.define("get_instruction", function(request, response) {
 });
 
 Parse.Cloud.define("join", function(request, response) {
+  // count how many existing players
+  // add a new player object (playerNumber = count + 1, score = 0)
+  // return the player count + 1
 
+  var query = new Parse.Query("Player");
+  query.find({
+    success: function(results) {
+      var Player = new Parse.Object.extend("Player");
+      var newPlayer= new Player();
+
+      newPlayer.set("playerNumber", results.length + 1);
+      newPlayer.set("score", 0);
+
+      newPlayer.save(null);
+
+      response.success(results.length + 1);
+    },
+    error: function() {
+      response.success(-1);
+    }
+  });
 });
 
 Parse.Cloud.define("ready", function(request, response) {
@@ -24,20 +44,18 @@ Parse.Cloud.define("ready", function(request, response) {
 
     },
     error: function(obj, error) {
+      var currInstruction = new Instruction();
 
+      currInstruction.set("simonSays", simonSays());
+      currInstruction.set("who", everyone());
+      currInstruction.set("action", actionNumber());
+      currInstruction.set("timeStamp", getTime());
+
+      // Note: hard-coded object ID
+      
+      currInstruction.set("objectId", "0");
     }
   });
-  var currInstruction = new Instruction();
-
-  currInstruction.set("simonSays", simonSays());
-  currInstruction.set("who", everyone());
-  currInstruction.set("action", actionNumber());
-  currInstruction.set("timeStamp", getTime());
-
-  // Note: hard-coded object ID
-  
-  currInstruction.set("objectId", "0");
-
 
 });
 
@@ -65,7 +83,7 @@ function everyone() {
 }
 
 function actionNumber() {
-	// var generated = Math.random()*16.0;
+	// var generated = Math.random()*15.0;
 	// return generated;
 	return 1;
 }
