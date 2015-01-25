@@ -153,7 +153,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     }
 
     private void sensorBegin() {
-        //TODO turn on sensor
+        // Register accelerometer to turn it on
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
         // Set timer to call sensorEnd()
         timer.schedule(new TimerTask() {
@@ -165,8 +166,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     }
 
     private void sensorEnd() {
-        //TODO turn off sensor and figure out what action they actually did
-
+        // Pause the sensor
+        mSensorManager.unregisterListener(this, mAccelerometer);
 
         // Detect success or fail
         boolean success = false;
@@ -320,6 +321,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     private void resetSensors() {
         leftRotate = false;
         rightRotate = false;
+        forwardRotate = false;
+        backRotate = false;
     }
 
 
@@ -408,10 +411,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 if (values[0] > ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Left rotate detected", Toast.LENGTH_SHORT).show();
                     leftRotate = true;
-                    rightRotate = false;
                 } else if (values[0] < -ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Right rotate detected", Toast.LENGTH_SHORT).show();
-                    leftRotate = false;
                     rightRotate = true;
                 }
 
@@ -419,10 +420,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 if (values[1] > ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Forward rotate detected", Toast.LENGTH_SHORT).show();
                     forwardRotate = true;
-                    backRotate = false;
                 } else if (values[1] < -ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Back rotate detected", Toast.LENGTH_SHORT).show();
-                    forwardRotate = false;
                     backRotate = true;
                 }
             }
@@ -432,15 +431,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     @Override
     protected void onResume () {
         super.onResume();
-
-        // Register sensors, rendering them active
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
     @Override
     protected void onPause () {
         super.onPause();
-        // Pause the sensor
-        mSensorManager.unregisterListener(this, mAccelerometer);
     }
 
     @Override
