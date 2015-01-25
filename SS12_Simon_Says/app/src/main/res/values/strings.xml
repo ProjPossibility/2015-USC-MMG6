@@ -62,6 +62,6 @@
     </string-array>
 
     <string name="title_activity_game">Simon Says</string>
-    <string name="title_activity_activity_instruction">ActivityInstruction</string>
+    <string name="title_activity_activity_instruction">Simon Says</string>
 
 </resources>

@@ -15,6 +15,7 @@ public class GameActivity extends ActionBarActivity {
     TextView textView_p3;
     TextView textView_p4;
     TextView textView_round;
+    int round = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,37 +30,9 @@ public class GameActivity extends ActionBarActivity {
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
         textView_round = (TextView)findViewById(R.id.textView_round);
 
-        //JSON CODE
-//        //getting
-//        try {
-//            //URL url = new URL ("http://SOMETHING.json");
-//            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-//            urlConnection.setRequestMethod("GET");
-//            urlConnection.connect();
-//            // gets the server json data
-//            BufferedReader bufferedReader =
-//                    new BufferedReader(new InputStreamReader(
-//                            urlConnection.getInputStream()));
-//            String next;
-//            while ((next = bufferedReader.readLine()) != null){
-//                JSONArray ja = new JSONArray(next);
-//                for (int i = 0; i < ja.length(); i++) {
-//                    JSONObject jo = (JSONObject) ja.get(i);
-//                    //items.add(jo.getString("text"));
-//                }
-//            }
-//        } catch (MalformedURLException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (JSONException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-    }
 
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

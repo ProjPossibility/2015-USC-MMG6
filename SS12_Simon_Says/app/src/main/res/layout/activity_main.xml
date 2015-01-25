@@ -39,7 +39,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/help"
-                android:id="@+id/button2"
+                android:id="@+id/button_help"
                 android:layout_gravity="center_horizontal"
                 android:background="#ee881f"
                 android:layout_weight="10"

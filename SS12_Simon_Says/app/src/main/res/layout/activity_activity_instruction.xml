@@ -14,24 +14,37 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0px"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/instruction"
             android:id="@+id/textView"
+            android:layout_weight="1"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFFFFF"/>
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0px"
             android:layout_margin="10dp"
             android:background="#222222"
+            android:layout_weight="6"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/instruction_text"
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFFFFF"
             />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:text="Return"
+            android:layout_margin="10dp"
+            android:textSize="55sp"
+            android:layout_weight="6"
+            android:id="@+id/button_return"
+            android:background="#ee881f"/>
+
     </LinearLayout>
 
 </RelativeLayout>

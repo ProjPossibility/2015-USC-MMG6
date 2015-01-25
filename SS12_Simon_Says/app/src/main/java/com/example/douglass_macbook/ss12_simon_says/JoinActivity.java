@@ -1,5 +1,6 @@
 package com.example.douglass_macbook.ss12_simon_says;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -10,7 +11,6 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.FunctionCallback;
-import com.parse.Parse;
 import com.parse.ParseCloud;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -59,7 +59,7 @@ public class JoinActivity extends ActionBarActivity {
                     @Override
                     public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
                         if (e == null && parseObjects.size()>1) {
-                            Toast.makeText(getApplicationContext(), parseObjects.size(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), Integer.toString(parseObjects.size()), Toast.LENGTH_SHORT).show();
                             startGame();
                         } else {
                             Toast.makeText(getApplicationContext(), "Need at least two users!", Toast.LENGTH_SHORT).show();
@@ -70,8 +70,8 @@ public class JoinActivity extends ActionBarActivity {
         });
     }
     private void startGame() {
-
-
+        Intent myIntent = new Intent(JoinActivity.this, GameActivity.class);
+        JoinActivity.this.startActivity(myIntent);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
