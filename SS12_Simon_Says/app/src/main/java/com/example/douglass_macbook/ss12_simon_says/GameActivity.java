@@ -6,18 +6,18 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -84,6 +84,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         textView_p2 = (TextView)findViewById(R.id.textView_P2);
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
+
         textView_round = (TextView)findViewById(R.id.textView_roundNum);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
@@ -102,23 +103,46 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             @Override
             public void done(HashMap<String, Object> instruction, com.parse.ParseException e) {
                 if (e == null) {
-                    simonSays = (boolean)instruction.get("simonSays");
-                    arraylist = (ArrayList<Integer>) instruction.get("who");
-                    action = (int)instruction.get("action");
-                    timeStamp = (long)instruction.get("timeStamp");
+
+
+//                  simonSays = (boolean)instruction.get("simonSays");
+//                  arraylist = (ArrayList<Integer>) instruction.get("who");
+//                  action = (int)instruction.get("action");
+//                  timeStamp = (long)instruction.get("timeStamp");
+
+
+                    //timeStamp = (long)instruction.get("timeStamp");
+
                     //Date timeStampDate = (Date)instruction.get("timestamp");
 
+
+                    //testing
                     //SET PLAYER NUM ID
                     handleEvents();
-
                     } else {
                         Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
                     }
                 }
             });
+
+        //test events handling
+        //testing
+
+        //Sample input to test screens
+        simonSays = true;
+        arraylist = new ArrayList<Integer>();
+        arraylist.add(1);
+        arraylist.add(2);
+        arraylist.add(3);
+        arraylist.add(4);
+        action = 0;
+
+        //SET PLAYER NUM ID
+        handleEvents();
     }
 
     private void handleEvents() {
+        Toast.makeText(getApplicationContext(), "Handling events", Toast.LENGTH_LONG).show();
         round++;
         String insert = Integer.toString(round);
         textView_round.setText("1");
@@ -129,7 +153,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         if (max_players == arraylist.size()) {
             //everyone
             textView_instructions.append(" everyone");
-
         }
         else{
             //just some people
@@ -142,17 +165,16 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 }
             }
         }
-        //turn sensor on
         switch(action){
             case 0:
                 if(userShouldDoAction() && leftRotate){
                     //needs to go left
                     playerScore++;
                     updatePlayerScore( playerScore );
-
+                    displayImage("check");
                 }
                 else{
-
+                    displayImage("cross");
                 }
                 break;
             case 1:
@@ -160,6 +182,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go right
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 2:
@@ -167,6 +193,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go up
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }else{
+                    displayImage("cross");
                 }
                 break;
             case 3:
@@ -174,6 +203,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go down
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 4:
@@ -181,6 +214,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go punch
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 5:
@@ -188,6 +225,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to elbow
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 6:
@@ -195,6 +236,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to stay
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 7:
@@ -202,6 +247,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to move
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }else{
+                    displayImage("cross");
                 }
             break;
             case 8:
@@ -233,6 +281,30 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 break;
         }
     }
+    private void displayImage(String status) {
+        ImageView active = (ImageView)findViewById(R.id.correct_image);
+        if( status.equalsIgnoreCase("check") ){
+            active = (ImageView)findViewById(R.id.correct_image);
+        }
+        else if( status.equalsIgnoreCase("cross") ){
+            active = (ImageView)findViewById(R.id.wrong_image);
+        }
+        else if(status.equalsIgnoreCase("go")){
+            active = (ImageView)findViewById(R.id.go_image);
+        }
+        else if(status.equalsIgnoreCase("winner")){
+            active = (ImageView)findViewById(R.id.winner_image);
+        }
+        Log.d("fucccking", "shieeet");
+        Calendar c = Calendar.getInstance();
+        int seconds_start = c.get(Calendar.SECOND);
+        int seconds_end = c.get(Calendar.SECOND);
+        int difference = seconds_end-seconds_start;
+        do {
+            active.setVisibility(View.VISIBLE);
+        }while (difference < 2 );
+        active.setVisibility(View.GONE);
+    }
 
     private void updatePlayerScore(int playerScore) {
         String score = Integer.toString(playerScore);
@@ -253,7 +325,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 break;
         }
     }
-
     boolean userShouldDoAction(){
         if (action==currentPlayerNumber)
             return true;

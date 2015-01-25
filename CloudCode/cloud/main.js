@@ -101,36 +101,77 @@ Parse.Cloud.define("ready", function(request, response) {
       else {
         var queryInstr = new Parse.Query("Instruction");
 
-        queryInstr.get("0", {
-          success: function(theInstruction) {
-            response.success(theInstruction);
+        queryInstr.find({
+          success: function(results) {
+            if(results.length > 0) {
+              response.success(results[0]);
+            }
+            else {
+              var Instruction = Parse.Object.extend("Instruction");
+              var currInstruction = new Instruction();
+
+              currInstruction.set("simonSays", simonSays());
+              currInstruction.set("who", everyone());
+              currInstruction.set("action", actionNumber());
+              currInstruction.set("timeStamp", getTime());
+
+              // Note: hard-coded object ID
+                      
+              //currInstruction.set("objectId", "0");
+              currInstruction.save(null, {
+                success: function() {
+                  response.success(currInstruction);
+                }
+              });
+            }
           },
           error: function(obj, error) {
-            var Instruction = Parse.Object.extend("Instruction");
-            var currInstruction = new Instruction();
-
-            currInstruction.set("simonSays", simonSays());
-            currInstruction.set("who", everyone());
-            currInstruction.set("action", actionNumber());
-            currInstruction.set("timeStamp", getTime());
-
-            // Note: hard-coded object ID
             
-            currInstruction.set("objectId", "0");
-            currInstruction.save(null);
-            response.success(currInstruction);
           }
         });
+
+        // queryInstr.get("0", {
+        //   success: function(theInstruction) {
+        //     response.success(theInstruction);
+        //   },
+        //   error: function(obj, error) {
+        //     var Instruction = Parse.Object.extend("Instruction");
+        //     var currInstruction = new Instruction();
+
+        //     currInstruction.set("simonSays", simonSays());
+        //     currInstruction.set("who", everyone());
+        //     currInstruction.set("action", actionNumber());
+        //     currInstruction.set("timeStamp", getTime());
+
+        //     // Note: hard-coded object ID
+            
+        //     currInstruction.set("objectId", "0");
+        //     currInstruction.save();
+        //     response.success(currInstruction);
+        //   }
+        // });
       }
     }
   });
 
 });
 
+// Delete instruction, if currently existing
 // Tell the back-end whether it's success/fail
-// Also delete instruction, if currently existing
 // request params: playerNumber, isSuccess
 Parse.Cloud.define("result", function(request, response) {
+  var queryInstr = new Parse.Query("Instruction");
+  queryInstr.find({
+    success: function(results) {
+      if(results.length > 0) {
+        results[0].destroy();
+      }
+    },
+    error: function(obj, error) {
+      
+    }
+  });
+
   var query = new Parse.Query("Player");
   var playerNumber = request.params.playerNumber;
   query.equalTo("playerNumber", playerNumber);

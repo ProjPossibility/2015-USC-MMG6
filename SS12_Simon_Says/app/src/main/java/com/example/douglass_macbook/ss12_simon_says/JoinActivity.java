@@ -33,7 +33,6 @@ public class JoinActivity extends ActionBarActivity {
         userId = user.getObjectId();
 
 
-
         //assign this to match xml button
         start_button = (Button) findViewById(R.id.button_start);
         start_button.setOnClickListener( new View.OnClickListener() {
@@ -45,7 +44,7 @@ public class JoinActivity extends ActionBarActivity {
                     @Override
                     public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
                         if (e == null && parseObjects.size()>1) {
-                            Toast.makeText(getApplicationContext(), Integer.toString(parseObjects.size()), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), Integer.toString(parseObjects.size()), Toast.LENGTH_SHORT).show();
                             startGame();
                         } else {
                             Toast.makeText(getApplicationContext(), "Need at least two users!", Toast.LENGTH_SHORT).show();
