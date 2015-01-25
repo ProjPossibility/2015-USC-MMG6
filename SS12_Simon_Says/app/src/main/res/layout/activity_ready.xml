@@ -38,5 +38,14 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:src="@drawable/icon_new"/>
+
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/winner_image"
+        android:paddingTop="200dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        android:src="@drawable/winner"/>
 </RelativeLayout>

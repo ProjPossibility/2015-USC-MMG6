@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.parse.FunctionCallback;
@@ -20,12 +22,13 @@ import java.util.TimerTask;
 public class ReadyActivity extends ActionBarActivity {
 
     Timer timer = new Timer();
-
+    ImageView imageView_winner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ready);
-
+        imageView_winner = (ImageView)findViewById(R.id.winner_image);
         // Start ready signal going
         timer.schedule(sendReadySignal, 0);
     }
@@ -45,7 +48,7 @@ public class ReadyActivity extends ActionBarActivity {
                                     timer.schedule(sendReadySignal, 500);
                                 } else if (response.equals("end")) {
                                     // Navigate to EndActivity
-                                    endGame();
+                                    endGame(result);
                                 } else { // assume we got a valid instruction
                                     // Set the static instruction object in GameActivity
                                     GameActivity.instruction = result;
@@ -83,13 +86,41 @@ public class ReadyActivity extends ActionBarActivity {
         ReadyActivity.this.startActivityForResult(myIntent, 0);
     }
 
-    protected void endGame() {
-        
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         timer.schedule(sendReadySignal, 0);
+    }
+
+
+
+    protected void endGame(HashMap<String, Object> result) {
+        ArrayList<HashMap<String, Object>> players = (ArrayList<HashMap<String, Object>>)result.get("players");
+        int maxScore = -1;
+        int playerNumber = 0;
+        for(HashMap<String, Object> player : players) {
+            int score = (int)player.get("score");
+            if(score > maxScore) {
+                maxScore = score;
+                playerNumber = (int)player.get("playerNumber");
+            }
+        }
+
+        // playerNumber is the winner and they have a score of maxScore
+        if(GameActivity.currentPlayerNumId==playerNumber){
+            imageView_winner.setVisibility(View.VISIBLE);
+        }
+
+        // Schedule returning back to JoinActivity
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Hide winner image
+                imageView_winner.setVisibility(View.GONE);
+
+                finish();
+            }
+        }, 4500);
+
     }
 
 
