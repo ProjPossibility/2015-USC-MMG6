@@ -1,4 +1,4 @@
-var MAX_SCORE = 10;
+var MAX_SCORE = 2;
 
 Parse.Cloud.define("join", function(request, response) {
   // count how many existing players
@@ -102,11 +102,11 @@ Parse.Cloud.define("ready", function(request, response) {
         var responseObj = {
           response: "end",
           players: []
-        };
+        };  
         for(var i = 0; i < results.length; i++) {
           responseObj.players.push({
-            playerNumber: results[i].playerNumber,
-            score: results[i].score
+            playerNumber: results[i].get("playerNumber"),
+            score: results[i].get("score")
           });
         }
         response.success(responseObj);
@@ -279,9 +279,8 @@ function who() {
 }
 
 function actionNumber() {
-	// var generated = Math.random()*15.0;
-	// return generated;
-	return 0;
+	var generated = Math.random()*4;
+	return Math.floor(generated);
 }
 
 function getTime() { 

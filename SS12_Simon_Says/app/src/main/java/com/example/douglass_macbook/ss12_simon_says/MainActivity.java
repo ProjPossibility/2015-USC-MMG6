@@ -1,6 +1,7 @@
 package com.example.douglass_macbook.ss12_simon_says;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends ActionBarActivity {
 
+    MediaPlayer mMediaPlayer;
     Button button_startGame;
     Button button_help;
 
@@ -43,6 +45,16 @@ public class MainActivity extends ActionBarActivity {
                 MainActivity.this.startActivityForResult(myIntent, 0);
             }
         });
+
+        // Play welcome message
+        mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.welcome);
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mMediaPlayer.release();
+            }
+        });
+        mMediaPlayer.start();
     }
 
     @Override

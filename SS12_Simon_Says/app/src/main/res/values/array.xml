@@ -19,10 +19,10 @@
         <item>Double Number </item>
     </string-array>
     <string-array name="instructions_group">
-        <item>Go Left</item>
-        <item>Go Right</item>
-        <item>Go Up</item>
-        <item>Go Down</item>
+        <item>Turn Left</item>
+        <item>Turn Right</item>
+        <item>Turn Backwards</item>
+        <item>Turn Forwards</item>
         <item>Punch Forward</item>
         <item>Elbow Back</item>
         <item>Stay Still</item>

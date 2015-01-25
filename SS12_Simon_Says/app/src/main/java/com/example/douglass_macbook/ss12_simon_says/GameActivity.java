@@ -216,7 +216,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 break;
             case 2:
                 if(userShouldDoAction() && backRotate && !forwardRotate){
-                    //needs to go up
+                    //needs to go backwards
                     success = true;
 
                 }else{
@@ -225,7 +225,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 break;
             case 3:
                 if(userShouldDoAction() && forwardRotate && !backRotate){
-                    //needs to go down
+                    //needs to go forwards
                     success = true;
                 }
                 else{
@@ -425,11 +425,11 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
                 // Detect y-rotation
                 if (values[1] > ROTATION_THRESHOLD) {
-                    Toast.makeText(this, "Forward rotate detected", Toast.LENGTH_SHORT).show();
-                    forwardRotate = true;
-                } else if (values[1] < -ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Back rotate detected", Toast.LENGTH_SHORT).show();
                     backRotate = true;
+                } else if (values[1] < -ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Forward rotate detected", Toast.LENGTH_SHORT).show();
+                    forwardRotate = true;
                 }
             }
         }
