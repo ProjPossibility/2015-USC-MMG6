@@ -149,13 +149,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         textView_instructions.setText(instructions);
 
-<<<<<<< HEAD
         // Set timer to call go()
-=======
-
-
         // Set timer to call sensorBegin()
->>>>>>> 346c5f1a4497a74d33581149076b5caacacda24f
         //TODO start audio that reads the instruction
         timer.schedule(new TimerTask() {
             @Override
