@@ -64,7 +64,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private long mLastUpdateTime;
-    private boolean detect;
 
     // Constants
     public static final int SENSOR_UPDATE_DELAY = 100;
@@ -78,7 +77,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         //dougStuff
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        detect = false;
 
         //setting textviews
         textView_instructions = (TextView)findViewById(R.id.textView_instruction);
@@ -343,13 +341,26 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 values[1] /= norm;
                 values[2] /= norm;
 
-                // Detect rotation
+                // Detect x-rotation
                 if (values[0] > ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Left rotate detected", Toast.LENGTH_SHORT).show();
                     leftRotate = true;
+                    rightRotate = false;
                 } else if (values[0] < -ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Right rotate detected", Toast.LENGTH_SHORT).show();
+                    leftRotate = false;
                     rightRotate = true;
+                }
+
+                // Detect y-rotation
+                if (values[1] > ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Forward rotate detected", Toast.LENGTH_SHORT).show();
+                    forwardRotate = true;
+                    backRotate = false;
+                } else if (values[1] < -ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Back rotate detected", Toast.LENGTH_SHORT).show();
+                    forwardRotate = false;
+                    backRotate = true;
                 }
             }
         }
