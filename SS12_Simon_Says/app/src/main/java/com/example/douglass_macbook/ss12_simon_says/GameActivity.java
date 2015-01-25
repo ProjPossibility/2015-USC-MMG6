@@ -30,7 +30,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
     // Constants
     public static final int SENSOR_UPDATE_DELAY = 100;
-    public static final float ROTATION_THRESHOLD = 0.65f;
+    public static final float X_ROTATION_THRESHOLD = 0.65f;
+    public static final float Y_ROTATION_THRESHOLD = 0.65f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,13 +104,30 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
                 // Debug: send to text view
                 TextView tv = (TextView) findViewById(R.id.sensor_values);
-                tv.setText(String.format("%.5g%n", values[0]) + "\n" + detect);
-                if(values[0] > ROTATION_THRESHOLD && !detect) {
+                tv.setText(String.format("%.5g%n", values[0]) + "\n"
+                        + String.format("%.5g%n", values[1]) + "\n" + detect);
+                if(values[0] > X_ROTATION_THRESHOLD && !detect) {
                     Toast.makeText(this, "Left rotate detected", Toast.LENGTH_SHORT).show();
                     detect = true;
                 }
-                else if(values[0] < -ROTATION_THRESHOLD && !detect) {
+                else if(values[0] < -X_ROTATION_THRESHOLD && !detect) {
                     Toast.makeText(this, "Right rotate detected", Toast.LENGTH_SHORT).show();
+                    detect = true;
+                }
+
+                if (values[0] > Y_ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Left rotate detected", Toast.LENGTH_SHORT).show();
+                    detect = true;
+                } else if (values[0] < -Y_ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Right rotate detected", Toast.LENGTH_SHORT).show();
+                    detect = true;
+                }
+// Detect y-rotation
+                if (values[1] > Y_ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Forward rotate detected", Toast.LENGTH_SHORT).show();
+                    detect = true;
+                } else if (values[1] < -Y_ROTATION_THRESHOLD) {
+                    Toast.makeText(this, "Back rotate detected", Toast.LENGTH_SHORT).show();
                     detect = true;
                 }
             }
