@@ -132,6 +132,14 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         // Simon says:
         if (simonSays) {
             instructions += "Simon says ";
+            mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.simon_says);
+            mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mMediaPlayer.release();
+                }
+            });
+            mMediaPlayer.start();
         }
 
         // Who:
