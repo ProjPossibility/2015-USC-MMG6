@@ -28,7 +28,7 @@ To continue, please press return on the bottom screen.
         <item name="android:shadowRadius">2</item>
     </style>
 
-    <string name="title_activity_game">Simon Says</string>
+    <string name="title_activity_game"></string>
     <string name="title_activity_activity_instruction">Simon Says</string>
     <string name="title_activity_ready">ReadyActivity</string>
 
