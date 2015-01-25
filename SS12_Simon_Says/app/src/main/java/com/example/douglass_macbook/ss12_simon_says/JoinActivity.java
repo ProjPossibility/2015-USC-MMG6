@@ -66,7 +66,7 @@ public class JoinActivity extends ActionBarActivity {
 
     private void updateUsers() {
 
-        while(!gameStarted){
+        //while(!gameStarted){
 //            String response = (String) result.get("response");
 //            if (response.equals("wait")) {
 //                // Send the Ready signal again after half a second
@@ -83,7 +83,7 @@ public class JoinActivity extends ActionBarActivity {
 //              list.add(values[i]);
 //                }
 //                userList.setAdapter(adapter);
-        }
+        //}
     }
 
     private void startGame() {
