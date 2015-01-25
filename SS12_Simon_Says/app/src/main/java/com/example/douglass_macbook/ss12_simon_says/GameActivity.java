@@ -406,37 +406,30 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 values[1] /= norm;
                 values[2] /= norm;
 
-                // Debug: send to text view
-                //TextView tv = (TextView) findViewById(R.id.sensor_values);
-                //tv.setText(String.format("%.5g%n", values[0]) + "\n" + detect);
-                if (values[0] > ROTATION_THRESHOLD && !detect) {
+                // Detect rotation
+                if (values[0] > ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Left rotate detected", Toast.LENGTH_SHORT).show();
-                    detect = true;
                     leftRotate = true;
-                } else if (values[0] < -ROTATION_THRESHOLD && !detect) {
+                } else if (values[0] < -ROTATION_THRESHOLD) {
                     Toast.makeText(this, "Right rotate detected", Toast.LENGTH_SHORT).show();
-                    detect = true;
                     rightRotate = true;
                 }
             }
         }
     }
-        @Override
-        protected void onResume () {
-            super.onResume();
 
-            // Register sensors, rendering them active
-            mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        @Override
-        protected void onPause () {
-            super.onPause();
-            // Pause the sensor
-            mSensorManager.unregisterListener(this, mAccelerometer);
-        }
+    @Override
+    protected void onResume () {
+        super.onResume();
 
-    public void testClear(View view) {
-        detect = false;
+        // Register sensors, rendering them active
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    @Override
+    protected void onPause () {
+        super.onPause();
+        // Pause the sensor
+        mSensorManager.unregisterListener(this, mAccelerometer);
     }
 
     @Override
