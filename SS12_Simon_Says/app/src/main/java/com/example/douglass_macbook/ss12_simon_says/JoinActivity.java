@@ -36,12 +36,11 @@ public class JoinActivity extends ActionBarActivity {
         userId = user.getObjectId();
 
         //Testing parse code
-        ParseCloud.callFunctionInBackground("hello", new HashMap<String, Object>(), new FunctionCallback<String>() {
+        ParseCloud.callFunctionInBackground("hello", new HashMap<String, Object>(), new FunctionCallback<HashMap<String, Object> >() {
             @Override
-            public void done(String s, com.parse.ParseException e) {
+            public void done(HashMap<String, Object> map, com.parse.ParseException e) {
                 if (e == null) {
-                    // result is "Hello world!"
-                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), (String)map.get("world"), Toast.LENGTH_LONG).show();
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "ParseException", Toast.LENGTH_LONG).show();
