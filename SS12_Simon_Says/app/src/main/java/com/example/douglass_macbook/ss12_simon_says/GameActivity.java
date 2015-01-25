@@ -18,6 +18,7 @@ import com.parse.ParseCloud;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -119,6 +120,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     }
 
     private void handleEvents() {
+        Toast.makeText(getApplicationContext(), "Handling events", Toast.LENGTH_LONG).show();
         round++;
         String insert = Integer.toString(round);
         textView_round.setText("1");
@@ -149,10 +151,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go left
                     playerScore++;
                     updatePlayerScore( playerScore );
-
+                    displayImage("check");
                 }
                 else{
-
+                    displayImage("cross");
                 }
                 break;
             case 1:
@@ -160,6 +162,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go right
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 2:
@@ -167,6 +173,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go up
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }else{
+                    displayImage("cross");
                 }
                 break;
             case 3:
@@ -174,6 +183,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go down
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 4:
@@ -181,6 +194,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go punch
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 5:
@@ -188,6 +205,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to elbow
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 6:
@@ -195,6 +216,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to stay
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }
+                else{
+                    displayImage("cross");
                 }
                 break;
             case 7:
@@ -202,6 +227,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to move
                     playerScore++;
                     updatePlayerScore( playerScore );
+                    displayImage("check");
+                }else{
+                    displayImage("cross");
                 }
             break;
             case 8:
@@ -232,6 +260,31 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             default: //is an action item
                 break;
         }
+    }
+
+    private void displayImage(String status) {
+        ImageView active;
+        active = (ImageView)findViewById(R.id.correct_image);
+        if( status.equalsIgnoreCase("check") ){
+            active = (ImageView)findViewById(R.id.correct_image);
+        }
+        else if( status.equalsIgnoreCase("cross") ){
+            active = (ImageView)findViewById(R.id.wrong_image);
+        }
+        else if(status.equalsIgnoreCase("go")){
+            active = (ImageView)findViewById(R.id.go_image);
+        }
+        else if(status.equalsIgnoreCase("winner")){
+            active = (ImageView)findViewById(R.id.winner_image);
+        }
+        Calendar c = Calendar.getInstance();
+        int seconds_start = c.get(Calendar.SECOND);
+        int seconds_end = c.get(Calendar.SECOND);
+        int difference = seconds_end-seconds_start;
+        do {
+            active.setVisibility(View.VISIBLE);
+        }while (difference < 2 );
+        active.setVisibility(View.GONE);
     }
 
     private void updatePlayerScore(int playerScore) {
