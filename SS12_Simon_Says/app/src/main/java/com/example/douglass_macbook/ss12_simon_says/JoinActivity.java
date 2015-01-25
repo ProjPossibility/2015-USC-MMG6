@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -68,12 +67,25 @@ public class JoinActivity extends ActionBarActivity {
     }
 
     private void updateUsers() {
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayListUsers);
-        userList.setAdapter(adapter);
-//        arrayListUsers = new ArrayList<String>();
-//        for (int i = 0; i < arrayListUsers.length(); ++i) {
-//            list.add(values[i]);
-//        }
+
+        while(!gameStarted){
+//            String response = (String) result.get("response");
+//            if (response.equals("wait")) {
+//                // Send the Ready signal again after half a second
+//                timer.schedule(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        sendReadySignal();
+//                    }
+//                }, 500);
+
+//                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayListUsers);
+//              arrayListUsers = new ArrayList<String>();
+//              for (int i = 0; i < arrayListUsers.length(); ++i) {
+//              list.add(values[i]);
+//                }
+//                userList.setAdapter(adapter);
+        }
     }
 
     private void startGame() {
