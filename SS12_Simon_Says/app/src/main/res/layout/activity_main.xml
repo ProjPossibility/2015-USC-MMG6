@@ -31,9 +31,11 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="10"
                 android:textSize="47sp"
-                android:background="#111111"
+                android:background="#222222"
                 android:layout_margin="10dp"
-                android:textColor="#ee881f"/>
+                android:textColor="#DDDDDD"
+                android:drawableTop="@drawable/icon_new"
+                />
 
             <Button
                 android:layout_width="fill_parent"
@@ -41,11 +43,11 @@
                 android:text="@string/help"
                 android:id="@+id/button_help"
                 android:layout_gravity="center_horizontal"
-                android:background="#ee881f"
+                android:background="#555555"
                 android:layout_weight="10"
-                android:textSize="55sp"
+                android:textSize="60sp"
                 android:layout_margin="10dp"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#ee881f"/>
         </LinearLayout>
 
 
