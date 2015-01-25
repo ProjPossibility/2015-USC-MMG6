@@ -1,5 +1,6 @@
 package com.example.douglass_macbook.ss12_simon_says;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -69,8 +70,8 @@ public class JoinActivity extends ActionBarActivity {
         });
     }
     private void startGame() {
-
-
+        Intent myIntent = new Intent(JoinActivity.this, GameActivity.class);
+        JoinActivity.this.startActivity(myIntent);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
