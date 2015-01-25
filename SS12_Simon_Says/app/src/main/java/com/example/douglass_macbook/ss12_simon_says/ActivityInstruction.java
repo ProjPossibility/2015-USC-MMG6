@@ -10,7 +10,6 @@ import android.widget.Button;
 
 public class ActivityInstruction extends ActionBarActivity {
 
-    static boolean firstStart = false;
     Button button_return;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +19,10 @@ public class ActivityInstruction extends ActionBarActivity {
         button_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
 //                MainActivity.firstStart = true;
+=======
+>>>>>>> 79df0634c88f7d307138012b217c5105483407d9
                 finish();
             }
         });
