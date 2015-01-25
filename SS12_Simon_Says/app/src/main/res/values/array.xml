@@ -1,9 +1,9 @@
 <resources>
-            <string-array name="instructions_action_ind">
-        <item>Go Left </item>
-        <item>Go Right </item>
-        <item>Go Up </item>
-        <item>Go Down </item>
+    <string-array name="instructions_action_ind">
+        <item>Turn Left </item>
+        <item>Turn Right </item>
+        <item>Turn Up </item>
+        <item>Turn Down </item>
         <item>Punch Forward </item>
         <item>Elbow Back </item>
         <item>Stay Still </item>

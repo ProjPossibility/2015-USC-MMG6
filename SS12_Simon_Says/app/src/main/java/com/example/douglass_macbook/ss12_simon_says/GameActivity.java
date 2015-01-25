@@ -89,11 +89,11 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     round++;
                     handleEvents();
 
-                } else {
-                    Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+            });
     }
 
     private void handleEvents() {
@@ -224,7 +224,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             long currTime = System.currentTimeMillis();
             if (currTime - mLastUpdateTime > SENSOR_UPDATE_DELAY) {
                 mLastUpdateTime = currTime;
-
                 // Calculate normalized rotation values.
                 // Reference: http://stackoverflow.com/a/15149421/555544
                 float[] values = event.values;
