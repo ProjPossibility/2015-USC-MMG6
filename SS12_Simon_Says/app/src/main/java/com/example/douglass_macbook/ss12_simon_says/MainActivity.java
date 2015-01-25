@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.parse.Parse;
+
 public class MainActivity extends ActionBarActivity {
 
 
@@ -20,10 +22,18 @@ public class MainActivity extends ActionBarActivity {
         button_startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, GameActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, JoinActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
+
+
+
+        // Parse stuff:
+        // Enable Local Datastore.
+        // We only want these two lines to be called one time
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "9yqUakCzEIKfujACCHu063LqshOLUZrySAspjCO9", "rV1JpxIniI8YBl6dt5lG0bFj6r0TtE2uHUIn3Rx1");
     }
 
     @Override

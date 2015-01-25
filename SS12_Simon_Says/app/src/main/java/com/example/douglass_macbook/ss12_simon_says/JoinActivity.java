@@ -29,11 +29,6 @@ public class JoinActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-        // Parse stuff:
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "9yqUakCzEIKfujACCHu063LqshOLUZrySAspjCO9", "rV1JpxIniI8YBl6dt5lG0bFj6r0TtE2uHUIn3Rx1");
-
         //"signing us user"
         user = new ParseObject("User");
         user.saveInBackground();
@@ -49,7 +44,7 @@ public class JoinActivity extends ActionBarActivity {
                     Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), "Exception throw", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "ParseException", Toast.LENGTH_LONG).show();
                 }
             }
         });
