@@ -10,7 +10,9 @@ import android.widget.Toast;
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -27,6 +29,9 @@ public class GameActivity extends ActionBarActivity {
     int action;
     int timeStamp;
     int currentNumber;
+    int max_players = 4;
+    List<int[]> arraylist;
+    List<String> actionsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class GameActivity extends ActionBarActivity {
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
         textView_round = (TextView)findViewById(R.id.textView_round);
+        actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
         ParseCloud.callFunctionInBackground("get_instruction", new HashMap<String, Object>(), new FunctionCallback<HashMap<String, Object>>() {
             @Override
@@ -47,16 +53,42 @@ public class GameActivity extends ActionBarActivity {
                 if (e == null) {
                     simonSays = (boolean)instruction.get("simonSays");
                     who = (int[])instruction.get("who");
+                    arraylist = Arrays.asList(who);
                     action = (int)instruction.get("actionNumber");
                     timeStamp = (int)instruction.get("timestamp");
                     //Date timeStampDate = (Date)instruction.get("timestamp");
                     round++;
+                    handleEvents();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Exception on server query", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void handleEvents() {
+        textView_instructions.setText("");
+        if(simonSays){
+            textView_instructions.setText("Simon says");
+        }
+        if (max_players == arraylist.size()) {
+            //everyone
+            textView_instructions.append(" everyone");
+
+        }
+        else{
+            //just some people
+            for(int i = 0; i<arraylist.size(); i++ ){
+                String insert = arraylist.get(i).toString();
+                textView_instructions.append(" "+insert);
+                if( action>=0 &&  action <=14){
+                    insert = actionsArray.get(action);
+                    textView_instructions.append(insert);
+                }
+            }
+        }
+
     }
 
     @Override
