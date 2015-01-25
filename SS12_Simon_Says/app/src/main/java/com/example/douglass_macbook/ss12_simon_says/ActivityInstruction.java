@@ -20,7 +20,7 @@ public class ActivityInstruction extends ActionBarActivity {
         button_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstStart = true;
+                MainActivity.firstStart = true;
                 finish();
             }
         });
