@@ -32,6 +32,7 @@ public class JoinActivity extends ActionBarActivity {
         user.put("lives", "3");
         userId = user.getObjectId();
 
+
         //assign this to match xml button
         start_button = (Button) findViewById(R.id.button_start);
         start_button.setOnClickListener( new View.OnClickListener() {
