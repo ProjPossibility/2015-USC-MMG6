@@ -125,20 +125,27 @@ Parse.Cloud.define("ready", function(request, response) {
               response.success(results[0]);
             }
             else {
+
+              // Build responseObj
+              var responseObj = {
+                simonSays: simonSays(),
+                who: everyone(),
+                action: actionNumber(),
+                timeStamp: getTime()
+              }
+
+              // Build newInstruction
               var Instruction = Parse.Object.extend("Instruction");
-              var currInstruction = new Instruction();
+              var newInstruction = new Instruction();
+              newInstruction.set("simonSays", responseObj.simonSays);
+              newInstruction.set("who", responseObj.who);
+              newInstruction.set("action", responseObj.action);
+              newInstruction.set("timeStamp", responseObj.timeStamp);
 
-              currInstruction.set("simonSays", simonSays());
-              currInstruction.set("who", everyone());
-              currInstruction.set("action", actionNumber());
-              currInstruction.set("timeStamp", getTime());
-
-              // Note: hard-coded object ID
-                      
-              //currInstruction.set("objectId", "0");
-              currInstruction.save(null, {
+              // Save newInstruction and return responseObj
+              newInstruction.save(null, {
                 success: function() {
-                  response.success(currInstruction);
+                  response.success(responseObj);
                 }
               });
             }
