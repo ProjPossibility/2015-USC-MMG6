@@ -11,10 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -80,6 +78,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         textView_round = (TextView)findViewById(R.id.textView_roundNum);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
+        updatePlayerScore(playerScore);
+
         ParseCloud.callFunctionInBackground("get_instruction",
             new HashMap<String, Object>(),
             new FunctionCallback<HashMap<String, Object>>()
@@ -106,7 +106,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     private void handleEvents() {
         round++;
         String insert = Integer.toString(round);
-        textView_round.setText("insert");
+        textView_round.setText("1");
         textView_instructions.setText("");
         if(simonSays){
             textView_instructions.setText("Simon says");
