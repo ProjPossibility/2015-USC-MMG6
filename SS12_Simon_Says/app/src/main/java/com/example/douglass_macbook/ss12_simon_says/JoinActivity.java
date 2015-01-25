@@ -25,6 +25,7 @@ public class JoinActivity extends ActionBarActivity {
     Button start_button;
     String userId;
     ParseObject user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class JoinActivity extends ActionBarActivity {
                         if (e == null) {
                             GameActivity.currentPlayerNumber = receivedPlayerNumber;
                             GameActivity.currentPlayerNumId = receivedPlayerNumber;
+                            //TODO maybe: enable the start button
                         } else {
                             Toast.makeText(getApplicationContext(), "ParseException", Toast.LENGTH_LONG).show();
                         }
@@ -52,31 +54,36 @@ public class JoinActivity extends ActionBarActivity {
                 });
 
 
-        //assign this to match xml button
-        start_button = (Button) findViewById(R.id.button_start);
-        start_button.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //check if there are other users
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
-                query.findInBackground(new FindCallback<ParseObject>() {
-                    @Override
-                    public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
-                        if (e == null && parseObjects.size()>1) {
-                            //Toast.makeText(getApplicationContext(), Integer.toString(parseObjects.size()), Toast.LENGTH_SHORT).show();
-                            startGame();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Need at least two users!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
+            //assign this to match xml button
+            start_button = (Button) findViewById(R.id.button_start);
+            start_button.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    startGame();
+
+                    //check if there are other users
+//                    ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
+//                    query.findInBackground(new FindCallback<ParseObject>() {
+//                        @Override
+//                        public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
+//                                if (e == null && parseObjects.size()>1) {
+//                                //Toast.makeText(getApplicationContext(), Integer.toString(parseObjects.size()), Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                Toast.makeText(getApplicationContext(), "Need at least two users!", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+                }
         });
     }
     private void startGame() {
-        Intent myIntent = new Intent(JoinActivity.this, GameActivity.class);
+        Intent myIntent = new Intent(JoinActivity.this, ReadyActivity.class);
         JoinActivity.this.startActivity(myIntent);
     }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

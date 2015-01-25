@@ -14,10 +14,13 @@ public class MainActivity extends ActionBarActivity {
     static boolean firstStart = false;
     Button button_startGame;
     Button button_help;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         button_startGame = (Button)findViewById(R.id.button_startgame);
         button_startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,11 +42,13 @@ public class MainActivity extends ActionBarActivity {
         // Parse stuff:
         // Enable Local Datastore.
         // We only want these two lines to be called one time
-        if ( !firstStart){
+        if (!firstStart){
             Parse.enableLocalDatastore(this);
             Parse.initialize(this, "9yqUakCzEIKfujACCHu063LqshOLUZrySAspjCO9", "rV1JpxIniI8YBl6dt5lG0bFj6r0TtE2uHUIn3Rx1");
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

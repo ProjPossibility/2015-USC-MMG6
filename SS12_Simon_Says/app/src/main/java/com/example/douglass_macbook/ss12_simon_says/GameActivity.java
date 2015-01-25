@@ -18,6 +18,7 @@ import com.parse.ParseCloud;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -44,7 +45,6 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     boolean rightRotate = false;
     boolean forwardRotate = false;
     boolean backRotate = false;
-    int [] who;
     int action;
     int playerScore = 0;
     long timeStamp;
@@ -52,7 +52,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     static int currentPlayerNumId;
     static HashMap<String, Object> instruction;
     int max_players = 4;
-    ArrayList <Integer> arraylist;
+    ArrayList <Integer> who;
     List<String> actionsArray;
 
     List<String> roundStrings = Arrays.asList("P1: ", "P2: ", "P3: ", "P4: ");
@@ -68,6 +68,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     // Constants
     public static final int SENSOR_UPDATE_DELAY = 100;
     public static final float ROTATION_THRESHOLD = 0.65f;
+
+    // Timer
+    Timer timer = new Timer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,131 +101,149 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 
         // Get data from the instruction
         simonSays = (boolean)instruction.get("simonSays");
-        arraylist = (ArrayList<Integer>) instruction.get("who");
+        who = (ArrayList<Integer>) instruction.get("who");
         action = (int)instruction.get("action");
         timeStamp = (long)instruction.get("timeStamp");
 
-        //test events handling
-        //testing
-
-        //Sample input to test screens
-        simonSays = true;
-        arraylist = new ArrayList<Integer>();
-        arraylist.add(1);
-        arraylist.add(2);
-        arraylist.add(3);
-        arraylist.add(4);
-        action = 0;
-
-        //SET PLAYER NUM ID
-        handleEvents();
+        displayInstructions();
     }
 
-    private void handleEvents() {
-        Toast.makeText(getApplicationContext(), "Handling events", Toast.LENGTH_LONG).show();
+    private void displayInstructions() {
         round++;
         String insert = Integer.toString(round);
-        textView_round.setText("1");
+        textView_round.setText("insert");
         textView_instructions.setText("");
-        if(simonSays){
+        if (simonSays) {
             textView_instructions.setText("Simon says");
         }
-        if (max_players == arraylist.size()) {
+        if (max_players == who.size()) {
             //everyone
             textView_instructions.append(" everyone");
         }
         //insert instructions
-        if( action>=0 &&  action <=14){
-            insert = arraylist.get(action).toString();
-            textView_instructions.append(" "+insert);
+        if (action >= 0 && action <= 14) {
+            insert = actionsArray.get(action).toString();
+            textView_instructions.append(" " + insert);
         }
+
+        // Set timer to call go()
+        //TODO start audio that reads the instruction
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                go();
+            }
+        }, 4000);
+    }
+
+    private void go() {
+        // Show go image
+        displayImage("go");
+
+        // Set timer to call sensorBegin()
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Hide go image
+                imageView_go.setVisibility(View.GONE);
+
+                sensorBegin();
+            }
+        }, 500);
+    }
+
+    private void sensorBegin() {
+        //TODO turn on sensor
+
+        // Set timer to call sensorEnd()
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sensorEnd();
+            }
+        }, 500);
+    }
+
+    private void sensorEnd() {
+        //TODO turn off sensor and figure out what action they actually did
+
+
+        // Detect success or fail
+        boolean success = false;
         switch(action){
             case 0:
                 if(userShouldDoAction() && leftRotate){
                     //needs to go left
-                    playerScore++;
-                    updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    success = true;
                 }
                 else{
-                    //displayImage("cross");
+                    success = false;
                 }
                 break;
             case 1:
                 if(userShouldDoAction() && rightRotate){
                     //needs to go right
-                    playerScore++;
-                    updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    success = true;
                 }
                 else{
-                    //displayImage("cross");
+                    success = false;
                 }
                 break;
             case 2:
                 if(userShouldDoAction()){
                     //needs to go up
-                    playerScore++;
-                    updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    success = true;
+
                 }else{
-                    //displayImage("cross");
+                    success = false;
                 }
                 break;
             case 3:
                 if(userShouldDoAction()){
                     //needs to go down
-                    playerScore++;
-                    updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    success = true;
                 }
                 else{
-                    //displayImage("cross");
+                    success = false;
                 }
                 break;
             case 4:
                 if(userShouldDoAction()){
                     //needs to go punch
-                    playerScore++;
-                    updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    success = true;
                 }
                 else{
-                    //displayImage("cross");
+                    success = false;
                 }
                 break;
             case 5:
                 if(userShouldDoAction()){
                     //needs to elbow
-                    playerScore++;
-                    updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    success = true;
                 }
                 else{
-                    //displayImage("cross");
+                    success = false;
                 }
                 break;
             case 6:
                 if(userShouldDoAction()){
                     //needs to stay
-                    playerScore++;
-                    updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    success = true;
                 }
                 else{
-                    //displayImage("cross");
+                    success = false;
                 }
                 break;
             case 7:
                 if(userShouldDoAction()){
                     //needs to move
-                    playerScore++;
-                    updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    success = true;
                 }else{
-                    //displayImage("cross");
+                    success = false;
                 }
-            break;
+                break;
+
+            // Mental math actions
             case 8:
                 if(currentPlayerNumber%2!=0)
                     currentPlayerNumber+=7;
@@ -251,30 +272,72 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             default: //is an action item
                 break;
         }
+
+        if(success)
+        {
+            playerScore++;
+            updatePlayerScore( playerScore );
+            displayImage("check");
+        }
+        else
+        {
+            displayImage("cross");
+        }
+
+        resetSensors();
+
+        // Call the "result" function
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("playerNumber", currentPlayerNumId);
+        params.put("isSuccess", success);
+        ParseCloud.callFunctionInBackground("result", params,
+                new FunctionCallback<HashMap<String, Object>>() {
+                    @Override
+                    public void done(HashMap<String, Object> result, com.parse.ParseException e) {
+                        // Do nothing
+                    }
+                });
+
+
+
+        // Set timer to call sensorBegin()
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Hide check/cross images
+                imageView_check.setVisibility(View.GONE);
+                imageView_cross.setVisibility(View.GONE);
+
+                // Return to ReadyActivity
+                finish();
+            }
+        }, 1000);
     }
+
+
+
+    // Sets all sensor indicators to false
+    private void resetSensors() {
+        leftRotate = false;
+        rightRotate = false;
+    }
+
+
+
     private void displayImage(String status) {
-//        ImageView active = (ImageView)findViewById(R.id.correct_image);
-//        if( status.equalsIgnoreCase("check") ){
-//            active = (ImageView)findViewById(R.id.correct_image);
-//        }
-//        else if( status.equalsIgnoreCase("cross") ){
-            //imageView_cross.setVisibility(View.VISIBLE);
-//          }
-//        else if(status.equalsIgnoreCase("go")){
-//            active = (ImageView)findViewById(R.id.go_image);
-//        }
-//        else if(status.equalsIgnoreCase("winner")){
-//            active = (ImageView)findViewById(R.id.winner_image);
-//        }
-//        Log.d("fucccking", "shieeet");
-//        Calendar c = Calendar.getInstance();
-//        int seconds_start = c.get(Calendar.SECOND);
-//        int seconds_end = c.get(Calendar.SECOND);
-//        int difference = seconds_end-seconds_start;
-//        do {
-//            active.setVisibility(View.VISIBLE);
-//        }while (difference < 2 );
-//        active.setVisibility(View.GONE);
+        ImageView active = (ImageView)findViewById(R.id.correct_image);
+        if( status.equalsIgnoreCase("check") ){
+            imageView_check.setVisibility(View.VISIBLE);
+        }
+        else if( status.equalsIgnoreCase("cross") ){
+            imageView_cross.setVisibility(View.VISIBLE);
+        }
+        else if(status.equalsIgnoreCase("go")){
+            imageView_go.setVisibility(View.VISIBLE);
+        }
+        else if(status.equalsIgnoreCase("winner")){
+            imageView_winner.setVisibility(View.VISIBLE);
+        }
     }
 
     private void updatePlayerScore(int playerScore) {
