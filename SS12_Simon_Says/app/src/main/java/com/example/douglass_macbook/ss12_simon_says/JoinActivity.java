@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,7 +15,10 @@ import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class JoinActivity extends ActionBarActivity {
@@ -24,8 +28,10 @@ public class JoinActivity extends ActionBarActivity {
     ParseObject user;
     TextView userID;
     ListView userList;
-    ArrayList<String> arrayListUsers;
     Boolean gameStarted = false;
+
+    //Timer
+    Timer timer = new Timer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,20 +68,38 @@ public class JoinActivity extends ActionBarActivity {
                     startGame();
                 }
         });
+
+        // Start pinging the server for list of users
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getAndUpdatePlayerList();
+            }
+        }, 0);
     }
 
-    private void updateUsers() {
+    private void getAndUpdatePlayerList() {
+        // Call "get_players" function
+        ParseCloud.callFunctionInBackground("get_players", new HashMap<String, Object>(),
+                new FunctionCallback<ArrayList<Integer>>() {
+                    @Override
+                    public void done(ArrayList<Integer> playerNumbersResponse, com.parse.ParseException e) {
+                        if (e == null) { // i.e. no error
+                            updatePlayerList(playerNumbersResponse);
 
-        //while(!gameStarted){
-//            String response = (String) result.get("response");
-//            if (response.equals("wait")) {
-//                // Send the Ready signal again after half a second
-//                timer.schedule(new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        sendReadySignal();
-//                    }
-//                }, 500);
+                            // Call this function again after half a second
+                            timer.schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    getAndUpdatePlayerList();
+                                }
+                            }, 500);
+                        }
+                    }
+                });
+    }
+
+    private void updatePlayerList(ArrayList<Integer> playerNumbers) {
 
 //                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayListUsers);
 //              arrayListUsers = new ArrayList<String>();
@@ -83,7 +107,6 @@ public class JoinActivity extends ActionBarActivity {
 //              list.add(values[i]);
 //                }
 //                userList.setAdapter(adapter);
-        //}
     }
 
     private void startGame() {
