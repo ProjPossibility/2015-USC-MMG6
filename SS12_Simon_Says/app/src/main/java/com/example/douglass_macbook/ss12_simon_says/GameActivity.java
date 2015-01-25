@@ -90,6 +90,12 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
 
+        //set score to ?
+        textView_p1.setText(roundStrings.get(0) + '?' );
+        textView_p2.setText(roundStrings.get(1) + '?' );
+        textView_p3.setText(roundStrings.get(2) + '?' );
+        textView_p4.setText(roundStrings.get(3) + '?' );
+
         textView_round = (TextView)findViewById(R.id.textView_roundNum);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
