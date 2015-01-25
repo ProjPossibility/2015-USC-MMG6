@@ -360,16 +360,16 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             public void run() {
                 switch(currentPlayerNumId){
                     case 1:
-                        textView_p1.setText( score );
+                        textView_p1.setText(roundStrings.get(0) + score );
                         break;
                     case 2:
-                        textView_p2.setText( score );
+                        textView_p2.setText( roundStrings.get(1) + score );
                         break;
                     case 3:
-                        textView_p3.setText( score );
+                        textView_p3.setText(roundStrings.get(2) + score );
                         break;
                     case 4:
-                        textView_p4.setText( score );
+                        textView_p4.setText( roundStrings.get(3) + score );
                         break;
                     default:
                         break;
