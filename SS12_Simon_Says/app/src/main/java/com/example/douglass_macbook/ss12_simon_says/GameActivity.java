@@ -231,12 +231,22 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             public void run() {
                 sensorBegin();
             }
-        }, 4000);
+        }, 2000);
     }
 
     private void sensorBegin() {
         // Show go image
         displayImage(imageView_go, View.VISIBLE);
+
+
+        mMediaPlayer = MediaPlayer.create(GameActivity.this, R.raw.go);
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mMediaPlayer.release();
+            }
+        });
+        mMediaPlayer.start();
 
         // Register accelerometer to turn it on
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
