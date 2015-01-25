@@ -287,11 +287,18 @@ function simonSays() {
 }
 
 function forEveryone() {
-  return false; //TODO change this to return randomly chosen true or false, perhaps 60% true
+  var generated = Math.random();
+  if(generated < 0.6) {
+    // everyone
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 function who() {
-  return [1,2,3,4]; //TODO change this to chose a subset of them
+  return [1]; //TODO change this to chose a subset of them
 }
 
 function actionNumber() {
