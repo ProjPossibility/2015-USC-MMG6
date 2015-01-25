@@ -108,6 +108,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         action = (int)instruction.get("action");
         timeStamp = (long)instruction.get("timeStamp");
 
+        // Start the sequence
         displayInstructions();
     }
 

@@ -107,7 +107,13 @@ public class JoinActivity extends ActionBarActivity {
 
     private void startGame() {
         Intent myIntent = new Intent(JoinActivity.this, ReadyActivity.class);
-        JoinActivity.this.startActivity(myIntent);
+        JoinActivity.this.startActivityForResult(myIntent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Go back to main menu
+        finish();
     }
 
 

@@ -144,9 +144,10 @@ public class ReadyActivity extends ActionBarActivity {
                     }
                 });
                 // Return to MainMenu
-                Intent intentToMain = new Intent(getApplicationContext(), MainActivity.class);
-                intentToMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentToMain);
+                finish(); // (JoinActivity will also call finish())
+//                Intent intentToMain = new Intent(getApplicationContext(), MainActivity.class);
+//                intentToMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intentToMain);
 
             }
         }, 4500);
