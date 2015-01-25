@@ -6,10 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +26,7 @@ public class GameActivity extends ActionBarActivity {
     int [] who;
     int action;
     int timeStamp;
-    int currentNumber;
+    int currentPlayerNumber;
     int max_players = 4;
     List<int[]> arraylist;
     List<String> actionsArray;
@@ -88,9 +86,84 @@ public class GameActivity extends ActionBarActivity {
                 }
             }
         }
-
+        //turn sensor on
+        switch(action){
+            case 0:
+                if(userShouldDoAction() ){
+                    //needs to go left
+                }
+                break;
+            case 1:
+                if(userShouldDoAction()){
+                    //needs to go right
+                }
+                break;
+            case 2:
+                if(userShouldDoAction()){
+                    //needs to go up
+                }
+                break;
+            case 3:
+                if(userShouldDoAction()){
+                    //needs to go down
+                }
+                break;
+            case 4:
+                if(userShouldDoAction()){
+                    //needs to go punch
+                }
+                break;
+            case 5:
+                if(userShouldDoAction()){
+                    //needs to elbow
+                }
+                break;
+            case 6:
+                if(userShouldDoAction()){
+                    //needs to stay
+                }
+                break;
+            case 7:
+                if(userShouldDoAction()){
+                    //needs to move
+                }
+            break;
+            case 8:
+                if(currentPlayerNumber%2!=0)
+                    currentPlayerNumber+=7;
+                break;
+            case 9:
+                if(currentPlayerNumber%2==0)
+                    currentPlayerNumber+=7;
+                break;
+            case 10:
+                if(currentPlayerNumber%2!=0)
+                    currentPlayerNumber-=4;
+                break;
+            case 11:
+                if(currentPlayerNumber%2==0)
+                    currentPlayerNumber-=4;
+                break;
+            case 12:
+                currentPlayerNumber+=7;
+                break;
+            case 13:
+                currentPlayerNumber-=4;
+                break;
+            case 14:
+                currentPlayerNumber*=2;
+                break;
+            default: //is an action item
+                break;
+        }
     }
 
+    boolean userShouldDoAction(){
+        if (action==currentPlayerNumber)
+            return true;
+        else
+            return false;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

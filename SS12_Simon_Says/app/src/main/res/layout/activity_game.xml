@@ -27,6 +27,8 @@
             android:layout_alignEnd="@+id/textView_title"
             android:background="#222222"/>
 
+
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -109,8 +111,14 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"/>
 
-
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/go_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:src="@drawable/go2"/>
 
     </LinearLayout>
 

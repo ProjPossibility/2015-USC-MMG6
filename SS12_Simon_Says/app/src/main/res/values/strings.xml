@@ -53,12 +53,12 @@
         <item>Elbow Back</item>
         <item>Stay Still</item>
         <item>Move</item>
-        <item>Odd Add </item>
-        <item>Even Add </item>
-        <item>Odd Subtract </item>
-        <item>Even Subtract</item>
-        <item>Add </item>
-        <item>Subtract </item>
+        <item>Odd Add 7</item>
+        <item>Even Add 7</item>
+        <item>Odd Subtract 4</item>
+        <item>Even Subtract 4</item>
+        <item>Add 7</item>
+        <item>Subtract 4</item>
         <item>Double Number</item>
     </string-array>
 
