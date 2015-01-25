@@ -6,18 +6,18 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -154,14 +154,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
             //everyone
             textView_instructions.append(" everyone");
         }
-        //just some people
-        for(int i = 0; i<arraylist.size(); i++ ){
-            insert = arraylist.get(i).toString();
+        //insert instructions
+        if( action>=0 &&  action <=14){
+            insert = arraylist.get(action).toString();
             textView_instructions.append(" "+insert);
-            if( action>=0 &&  action <=14){
-                insert = actionsArray.get(action);
-                textView_instructions.append(insert);
-            }
         }
         switch(action){
             case 0:
@@ -169,10 +165,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go left
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    //displayImage("check");
+                    displayImage("check");
                 }
                 else{
-                    //displayImage("cross");
+                    displayImage("cross");
                 }
                 break;
             case 1:
@@ -280,28 +276,28 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         }
     }
     private void displayImage(String status) {
-        ImageView active = (ImageView)findViewById(R.id.correct_image);
-        if( status.equalsIgnoreCase("check") ){
-            active = (ImageView)findViewById(R.id.correct_image);
-        }
-        else if( status.equalsIgnoreCase("cross") ){
-            active = (ImageView)findViewById(R.id.wrong_image);
-        }
-        else if(status.equalsIgnoreCase("go")){
-            active = (ImageView)findViewById(R.id.go_image);
-        }
-        else if(status.equalsIgnoreCase("winner")){
-            active = (ImageView)findViewById(R.id.winner_image);
-        }
-        Log.d("fucccking", "shieeet");
-        Calendar c = Calendar.getInstance();
-        int seconds_start = c.get(Calendar.SECOND);
-        int seconds_end = c.get(Calendar.SECOND);
-        int difference = seconds_end-seconds_start;
-        do {
-            active.setVisibility(View.VISIBLE);
-        }while (difference < 2 );
-        active.setVisibility(View.GONE);
+//        ImageView active = (ImageView)findViewById(R.id.correct_image);
+//        if( status.equalsIgnoreCase("check") ){
+//            active = (ImageView)findViewById(R.id.correct_image);
+//        }
+//        else if( status.equalsIgnoreCase("cross") ){
+            imageView_cross.setVisibility(View.VISIBLE);
+//          }
+//        else if(status.equalsIgnoreCase("go")){
+//            active = (ImageView)findViewById(R.id.go_image);
+//        }
+//        else if(status.equalsIgnoreCase("winner")){
+//            active = (ImageView)findViewById(R.id.winner_image);
+//        }
+//        Log.d("fucccking", "shieeet");
+//        Calendar c = Calendar.getInstance();
+//        int seconds_start = c.get(Calendar.SECOND);
+//        int seconds_end = c.get(Calendar.SECOND);
+//        int difference = seconds_end-seconds_start;
+//        do {
+//            active.setVisibility(View.VISIBLE);
+//        }while (difference < 2 );
+//        active.setVisibility(View.GONE);
     }
 
     private void updatePlayerScore(int playerScore) {
