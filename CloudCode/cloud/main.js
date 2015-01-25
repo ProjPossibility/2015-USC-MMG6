@@ -1,17 +1,5 @@
 var MAX_SCORE = 10;
 
-// Use Parse.Cloud.define to define as many cloud functions as you want.
-// For example:
-Parse.Cloud.define("get_instruction", function(request, response) {
-  var jsonResponse = {
-    simonSays: simonSays(),
-    who: everyone(),
-    action: actionNumber(),
-    timeStamp: getTime()    
-  };
-  response.success(jsonResponse);
-});
-
 Parse.Cloud.define("join", function(request, response) {
   // count how many existing players
   // add a new player object (playerNumber = count + 1, score = 0)
@@ -152,7 +140,7 @@ Parse.Cloud.define("ready", function(request, response) {
               var responseObj = {
                 response: "instruction",
                 simonSays: simonSays(),
-                forEveryone: forEveryone();
+                forEveryone: forEveryone(),
                 who: who(),
                 action: actionNumber(),
                 timeStamp: getTime()
