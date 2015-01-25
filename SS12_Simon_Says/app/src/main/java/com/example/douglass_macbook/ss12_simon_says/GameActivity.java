@@ -33,10 +33,16 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     TextView textView_round;
     int round = 1;
     boolean simonSays;
+    boolean leftRotate = false;
+    boolean rightRotate = false;
+    boolean forwardRotate = false;
+    boolean backRotate = false;
     int [] who;
     int action;
+    int playerScore = 0;
     int timeStamp;
     int currentPlayerNumber;
+    int currentPlayerNumId;
     int max_players = 4;
     ArrayList <Integer> arraylist;
     List<String> actionsArray;
@@ -71,7 +77,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         textView_p2 = (TextView)findViewById(R.id.textView_P2);
         textView_p3 = (TextView)findViewById(R.id.textView_P3);
         textView_p4 = (TextView)findViewById(R.id.textView_P4);
-        textView_round = (TextView)findViewById(R.id.textView_round);
+        textView_round = (TextView)findViewById(R.id.textView_roundNum);
         actionsArray = Arrays.asList( getApplicationContext().getResources().getStringArray(R.array.instructions_group) );
 
         ParseCloud.callFunctionInBackground("get_instruction",
@@ -86,7 +92,8 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     action = (int)instruction.get("action");
                     timeStamp = (int)instruction.get("timeStamp");
                     //Date timeStampDate = (Date)instruction.get("timestamp");
-                    round++;
+
+                    //SET PLAYER NUM ID
                     handleEvents();
 
                     } else {
@@ -97,6 +104,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     }
 
     private void handleEvents() {
+        round++;
+        String insert = Integer.toString(round);
+        textView_round.setText("insert");
         textView_instructions.setText("");
         if(simonSays){
             textView_instructions.setText("Simon says");
@@ -109,7 +119,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         else{
             //just some people
             for(int i = 0; i<arraylist.size(); i++ ){
-                String insert = arraylist.get(i).toString();
+                insert = arraylist.get(i).toString();
                 textView_instructions.append(" "+insert);
                 if( action>=0 &&  action <=14){
                     insert = actionsArray.get(action);
@@ -120,43 +130,59 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         //turn sensor on
         switch(action){
             case 0:
-                if(userShouldDoAction() ){
+                if(userShouldDoAction() && leftRotate){
                     //needs to go left
+                    playerScore++;
+                    updatePlayerScore( playerScore );
                 }
                 break;
             case 1:
-                if(userShouldDoAction()){
+                if(userShouldDoAction() && rightRotate){
                     //needs to go right
+                    playerScore++;
+                    updatePlayerScore( playerScore );
                 }
                 break;
             case 2:
                 if(userShouldDoAction()){
                     //needs to go up
+                    playerScore++;
+                    updatePlayerScore( playerScore );
                 }
                 break;
             case 3:
                 if(userShouldDoAction()){
                     //needs to go down
+                    playerScore++;
+                    updatePlayerScore( playerScore );
                 }
                 break;
             case 4:
                 if(userShouldDoAction()){
                     //needs to go punch
+                    playerScore++;
+                    updatePlayerScore( playerScore );
                 }
                 break;
             case 5:
                 if(userShouldDoAction()){
                     //needs to elbow
+                    playerScore++;
+                    updatePlayerScore( playerScore );
                 }
                 break;
             case 6:
                 if(userShouldDoAction()){
                     //needs to stay
+                    playerScore++;
+                    updatePlayerScore( playerScore );
                 }
                 break;
             case 7:
                 if(userShouldDoAction()){
                     //needs to move
+                    playerScore++;
+                    updatePlayerScore( playerScore );
                 }
             break;
             case 8:
@@ -185,6 +211,26 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 currentPlayerNumber*=2;
                 break;
             default: //is an action item
+                break;
+        }
+    }
+
+    private void updatePlayerScore(int playerScore) {
+        String score = Integer.toString(playerScore);
+        switch(currentPlayerNumId){
+            case 1:
+                textView_p1.setText(score);
+                break;
+            case 2:
+                textView_p2.setText(score);
+                break;
+            case 3:
+                textView_p3.setText(score);
+                break;
+            case 4:
+                textView_p4.setText(score);
+                break;
+            default:
                 break;
         }
     }
@@ -240,9 +286,11 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 if (values[0] > ROTATION_THRESHOLD && !detect) {
                     Toast.makeText(this, "Left rotate detected", Toast.LENGTH_SHORT).show();
                     detect = true;
+                    leftRotate = true;
                 } else if (values[0] < -ROTATION_THRESHOLD && !detect) {
                     Toast.makeText(this, "Right rotate detected", Toast.LENGTH_SHORT).show();
                     detect = true;
+                    rightRotate = true;
                 }
             }
         }
