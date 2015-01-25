@@ -11,11 +11,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseObject;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,6 +29,7 @@ public class JoinActivity extends ActionBarActivity {
     TextView userID;
     ListView userList;
     Boolean gameStarted = false;
+    ArrayList<Integer> arrayListUsers;
 
     //Timer
     Timer timer = new Timer();
@@ -39,6 +41,7 @@ public class JoinActivity extends ActionBarActivity {
 
         userID = (TextView)findViewById(R.id.textView_title);
         userList = (ListView)findViewById(R.id.listView);
+        arrayListUsers = new ArrayList<Integer>();
 
         // Get player number
         ParseCloud.callFunctionInBackground("join",
@@ -98,13 +101,8 @@ public class JoinActivity extends ActionBarActivity {
     }
 
     private void updatePlayerList(ArrayList<Integer> playerNumbers) {
-
-//                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayListUsers);
-//              arrayListUsers = new ArrayList<String>();
-//              for (int i = 0; i < arrayListUsers.length(); ++i) {
-//              list.add(values[i]);
-//                }
-//                userList.setAdapter(adapter);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, playerNumbers);
+        userList.setAdapter(adapter);
     }
 
     private void startGame() {
