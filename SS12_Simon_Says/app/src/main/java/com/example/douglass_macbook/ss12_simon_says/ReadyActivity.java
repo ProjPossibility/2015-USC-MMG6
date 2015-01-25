@@ -13,6 +13,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
+
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class ReadyActivity extends ActionBarActivity {
 
@@ -23,6 +30,7 @@ public class ReadyActivity extends ActionBarActivity {
     Date now;
     long millis;
 
+    Timer timer = new Timer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +74,32 @@ public class ReadyActivity extends ActionBarActivity {
 
         }
 
+        timer.schedule(sendReadySignal, 0);
     }
+
+    protected TimerTask sendReadySignal = new TimerTask() {
+        @Override
+        public void run() {
+            ParseCloud.callFunctionInBackground("ready", new HashMap<String, Object>(),
+                new FunctionCallback<HashMap<String, Object>>()
+                {
+                    @Override
+                    public void done(HashMap<String, Object> result, com.parse.ParseException e) {
+                        if (e == null) { // i.e. no error
+                            String response = (String) result.get("response");
+                            if (response.equals("wait")) {
+                                // Send the Ready signal again after half a second
+                                timer.schedule(sendReadySignal, 500);
+                            } else if (response.equals("end")) {
+                                //TODO navigate to end activity
+                            } else { // assume we got a valid instruction
+                                //TODO schedule a timer to start game
+                            }
+                        }
+                    }
+                });
+        }
+    };
 
 
     @Override
