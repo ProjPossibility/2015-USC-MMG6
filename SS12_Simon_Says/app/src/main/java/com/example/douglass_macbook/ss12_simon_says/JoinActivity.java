@@ -20,7 +20,6 @@ import java.util.HashMap;
 public class JoinActivity extends ActionBarActivity {
 
     Button start_button;
-    String userId;
     ParseObject user;
     TextView userID;
     ListView userList;
@@ -47,6 +46,8 @@ public class JoinActivity extends ActionBarActivity {
                         if (e == null) {
                             GameActivity.currentPlayerNumber = receivedPlayerNumber;
                             GameActivity.currentPlayerNumId = receivedPlayerNumber;
+                            userID.append(Integer.toString( receivedPlayerNumber ));
+
                             //TODO maybe: enable the start button
                         } else {
                             Toast.makeText(getApplicationContext(), "ParseException", Toast.LENGTH_LONG).show();
@@ -66,24 +67,6 @@ public class JoinActivity extends ActionBarActivity {
 
     private void updateUsers() {
 
-        //while(!gameStarted){
-//            String response = (String) result.get("response");
-//            if (response.equals("wait")) {
-//                // Send the Ready signal again after half a second
-//                timer.schedule(new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        sendReadySignal();
-//                    }
-//                }, 500);
-
-//                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayListUsers);
-//              arrayListUsers = new ArrayList<String>();
-//              for (int i = 0; i < arrayListUsers.length(); ++i) {
-//              list.add(values[i]);
-//                }
-//                userList.setAdapter(adapter);
-        //}
     }
 
     private void startGame() {
