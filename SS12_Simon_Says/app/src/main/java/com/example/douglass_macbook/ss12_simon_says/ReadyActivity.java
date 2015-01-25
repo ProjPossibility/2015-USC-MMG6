@@ -12,11 +12,6 @@ import com.parse.ParseCloud;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-
-import com.parse.FunctionCallback;
-import com.parse.ParseCloud;
-
-import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 

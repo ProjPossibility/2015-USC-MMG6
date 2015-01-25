@@ -55,6 +55,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     ArrayList <Integer> arraylist;
     List<String> actionsArray;
 
+    List<String> roundStrings = Arrays.asList("P1: ", "P2: ", "P3: ", "P4: ");
     // Timer stuff
     private Timer myTimer = new Timer();
     private TimerTask mCommandTimer;
@@ -143,10 +144,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go left
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 1:
@@ -154,10 +155,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go right
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 2:
@@ -165,9 +166,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go up
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 3:
@@ -175,10 +176,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go down
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 4:
@@ -186,10 +187,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to go punch
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 5:
@@ -197,10 +198,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to elbow
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 6:
@@ -208,10 +209,10 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to stay
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }
                 else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
                 break;
             case 7:
@@ -219,9 +220,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                     //needs to move
                     playerScore++;
                     updatePlayerScore( playerScore );
-                    displayImage("check");
+                    //displayImage("check");
                 }else{
-                    displayImage("cross");
+                    //displayImage("cross");
                 }
             break;
             case 8:
@@ -259,7 +260,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 //            active = (ImageView)findViewById(R.id.correct_image);
 //        }
 //        else if( status.equalsIgnoreCase("cross") ){
-            imageView_cross.setVisibility(View.VISIBLE);
+            //imageView_cross.setVisibility(View.VISIBLE);
 //          }
 //        else if(status.equalsIgnoreCase("go")){
 //            active = (ImageView)findViewById(R.id.go_image);
@@ -282,16 +283,16 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         String score = Integer.toString(playerScore);
         switch(currentPlayerNumId){
             case 1:
-                textView_p1.setText(score);
+                textView_p1.setText( roundStrings.get(0) + score );
                 break;
             case 2:
-                textView_p2.setText(score);
+                textView_p2.setText(roundStrings.get(1) +score);
                 break;
             case 3:
-                textView_p3.setText(score);
+                textView_p3.setText(roundStrings.get(2) +score);
                 break;
             case 4:
-                textView_p4.setText(score);
+                textView_p4.setText(roundStrings.get(3) +score);
                 break;
             default:
                 break;
