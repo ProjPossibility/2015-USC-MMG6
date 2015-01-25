@@ -39,8 +39,12 @@
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:text="Return"
+            android:layout_margin="10dp"
+            android:textSize="55sp"
             android:layout_weight="6"
-            android:id="@+id/button_return" />
+            android:id="@+id/button_return"
+            android:background="#ee881f"/>
+
     </LinearLayout>
 
 </RelativeLayout>
