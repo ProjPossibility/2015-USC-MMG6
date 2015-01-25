@@ -54,6 +54,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
     ArrayList <Integer> arraylist;
     List<String> actionsArray;
 
+    List<String> roundStrings = Arrays.asList("P1: ", "P2: ", "P3: ", "P4: ");
     // Timer stuff
     private Timer myTimer = new Timer();
     private TimerTask mCommandTimer;
@@ -109,13 +110,9 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
 //                  arraylist = (ArrayList<Integer>) instruction.get("who");
 //                  action = (int)instruction.get("action");
 //                  timeStamp = (long)instruction.get("timeStamp");
-
-
                     //timeStamp = (long)instruction.get("timeStamp");
 
                     //Date timeStampDate = (Date)instruction.get("timestamp");
-
-
                     //testing
                     //SET PLAYER NUM ID
                     handleEvents();
@@ -304,16 +301,16 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         String score = Integer.toString(playerScore);
         switch(currentPlayerNumId){
             case 1:
-                textView_p1.setText(score);
+                textView_p1.setText( roundStrings.get(0) + score );
                 break;
             case 2:
-                textView_p2.setText(score);
+                textView_p2.setText(roundStrings.get(1) +score);
                 break;
             case 3:
-                textView_p3.setText(score);
+                textView_p3.setText(roundStrings.get(2) +score);
                 break;
             case 4:
-                textView_p4.setText(score);
+                textView_p4.setText(roundStrings.get(3) +score);
                 break;
             default:
                 break;
