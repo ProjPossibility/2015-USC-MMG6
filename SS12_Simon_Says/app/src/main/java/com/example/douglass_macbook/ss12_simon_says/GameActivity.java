@@ -18,7 +18,6 @@ import com.parse.ParseCloud;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -172,7 +171,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
         boolean success = false;
         switch(action){
             case 0:
-                if(userShouldDoAction() && leftRotate){
+                if(userShouldDoAction() && leftRotate && !rightRotate){
                     //needs to go left
                     success = true;
                 }
@@ -181,7 +180,7 @@ public class GameActivity extends ActionBarActivity implements SensorEventListen
                 }
                 break;
             case 1:
-                if(userShouldDoAction() && rightRotate){
+                if(userShouldDoAction() && rightRotate && !leftRotate){
                     //needs to go right
                     success = true;
                 }
